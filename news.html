@@ -1,6 +1,12 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
+<script>
+  if (window.location.hostname === 'nexusroleplay.ru' || window.location.hostname === 'www.nexusroleplay.ru') {
+    window.location.replace('https://play.nexusroleplay.ru' + window.location.pathname + window.location.search + window.location.hash);
+  }
+</script>
+
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#05040a">
@@ -181,7 +187,7 @@
   </div>
   <header class="top glass">
     <nav class="nav">
-      <a class="brand" href="index.html"><img src="logo.png" alt="Nexus"> NEXUS <b>RP</b></a>
+      <a class="brand" href="index.html"><img src="logo.png?v=2" alt="Nexus"> NEXUS <b>RP</b></a>
       <button type="button" class="menu" aria-label="Меню" aria-expanded="false">☰</button>
       <div class="links"><a href="index.html">Главная</a><a href="donate.html">Донат</a><a href="discord.html">Discord</a><a href="rules.html">Правила</a><a href="news.html" class="active">Новости</a><a href="team.html">Команда</a><a href="faq.html">FAQ</a></div>
     </nav>
@@ -193,26 +199,7 @@
     <p class="lead">Официальные анонсы Roblox-проекта Nexus RP.</p>
   </div></section>
   <div class="wrap"><div class="news-list" id="newsList">
-    <article class="news-card glass tilt-card"><div class="news-accent"></div><div class="news-body">
-      <div class="news-meta"><span class="date">8 ноября 2026</span><span class="news-tag">Сайт</span></div>
-      <h3>Открыт официальный сайт проекта</h3>
-      <p>Запущен сайт Nexus RP. Здесь публикуются новости, правила, информация о команде и донате. Основное общение — в Discord.</p>
-    </div></article>
-    <article class="news-card glass tilt-card"><div class="news-accent"></div><div class="news-body">
-      <div class="news-meta"><span class="date">Ноябрь 2026</span><span class="news-tag">Сообщество</span></div>
-      <h3>Discord-сервер активен</h3>
-      <p>Официальный Discord уже работает. Заходи, знакомься с будущими игроками Roblox RP и следи за анонсами открытия.</p>
-    </div></article>
-    <article class="news-card glass tilt-card"><div class="news-accent"></div><div class="news-body">
-      <div class="news-meta"><span class="date">В работе</span><span class="news-tag">Разработка</span></div>
-      <h3>Подготовка к открытию сервера</h3>
-      <p>Команда готовит Roblox-сервер и инфраструктуру. Дата запуска — в Discord и на сайте. Игровой сервер пока недоступен.</p>
-    </div></article>
-    <article class="news-card glass tilt-card"><div class="news-accent"></div><div class="news-body">
-      <div class="news-meta"><span class="date">Скоро</span><span class="news-tag">Правила</span></div>
-      <h3>Правила и система наказаний</h3>
-      <p>Свод ролевых правил, ПГО и таблица наказаний доступны на сайте. Форум апелляций появится ближе к открытию.</p>
-    </div></article>
+    <p class="muted" style="text-align:center;padding:28px;color:var(--muted)">Загрузка новостей…</p>
   </div></div>
 
   <footer class="footer">
