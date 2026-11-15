@@ -28,10 +28,7 @@
   }
 
   function goHardRedirect() {
-    // absolute path on domain
-    var target = '/not-approved';
-    // support .html hosts
-    if (location.pathname.indexOf('.html') !== -1) target = '/not-approved.html';
+    var target = '/not-approved.html';
     if (location.pathname.indexOf('not-approved') !== -1) return;
     location.replace(target);
   }
