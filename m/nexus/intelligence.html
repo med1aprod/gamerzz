@@ -2,506 +2,477 @@
 <html lang="ru">
 <head>
 <script>
-  if (window.location.hostname === 'nexusroleplay.ru' || window.location.hostname === 'www.nexusroleplay.ru') {
-    window.location.replace('https://play.nexusroleplay.ru' + window.location.pathname + window.location.search + window.location.hash);
+  if (location.hostname === 'nexusroleplay.ru' || location.hostname === 'www.nexusroleplay.ru') {
+    location.replace('https://play.nexusroleplay.ru' + location.pathname + location.search + location.hash);
   }
 </script>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <meta name="theme-color" content="#05040a">
-  <link rel="icon" href="/favicon.png" type="image/png">
-  <link rel="stylesheet" href="/aurora.css">
-  <link rel="stylesheet" href="/site-extras.css">
-  <script src="/config.js"></script>
-  <title>Intelligence — NexusAI v1</title>
-  <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;600;700;800&family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
-  <style>
-    :root {
-      --bg: #05040a; --text: #f4f0ff; --muted: #a39bb8;
-      --gold: #e8c87a; --gold-bright: #f5d98a;
-      --ai: #7dd3fc; --ai2: #a78bfa;
-    }
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    html, body { height: 100%; }
-    body {
-      background: var(--bg); color: var(--text);
-      font-family: Manrope, system-ui, sans-serif;
-      min-height: 100vh; overflow-x: hidden; line-height: 1.55;
-      display: flex; flex-direction: column;
-    }
-    a { color: inherit; text-decoration: none; }
-    .glass {
-      background: linear-gradient(165deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.035) 100%);
-      backdrop-filter: blur(50px) saturate(200%) brightness(1.12);
-      -webkit-backdrop-filter: blur(50px) saturate(200%) brightness(1.12);
-      border: 1px solid rgba(255,255,255,0.18);
-      box-shadow: 0 12px 40px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.28);
-    }
-    .top {
-      position: sticky; top: 12px; z-index: 100;
-      margin: 12px auto 0; width: min(1140px, calc(100% - 24px));
-      padding: 8px 12px 8px 16px; border-radius: 18px;
-    }
-    .nav { display: flex; align-items: center; gap: 10px; position: relative; }
-    .brand {
-      display: flex; align-items: center; gap: 10px;
-      font-family: Unbounded, sans-serif; font-weight: 700; letter-spacing: 0.03em; font-size: 14px;
-    }
-    .brand img { width: 32px; height: 32px; object-fit: contain; filter: drop-shadow(0 0 8px rgba(232,200,122,0.55)); }
-    .brand b { color: var(--gold-bright); }
-    .links { display: flex; gap: 2px; margin-left: auto; align-items: center; flex-wrap: wrap; }
-    .links a {
-      font-size: 13px; font-weight: 600; color: var(--muted);
-      padding: 8px 11px; border-radius: 11px; transition: 0.2s; white-space: nowrap;
-    }
-    .links a:hover { color: #fff; background: rgba(255,255,255,0.07); }
-    .links a.active {
-      color: #fff; background: rgba(255,255,255,0.1);
-      box-shadow: inset 0 0 0 1px rgba(255,255,255,0.14);
-    }
-    .menu {
-      display: none; margin-left: auto; width: 44px; height: 44px;
-      border: 1px solid rgba(255,255,255,0.14); background: rgba(255,255,255,0.08);
-      color: white; border-radius: 12px; cursor: pointer; font-size: 18px;
-      align-items: center; justify-content: center;
-    }
-    @media (max-width: 960px) {
-      .menu { display: flex; }
-      .links {
-        display: none; position: fixed; top: 72px; left: 12px; right: 12px;
-        flex-direction: column; gap: 6px; padding: 14px; border-radius: 18px; z-index: 999;
-        background: rgba(6,5,14,0.97) !important; border: 1px solid rgba(255,255,255,0.14);
-      }
-      .links.open { display: flex !important; }
-      .links a { width: 100%; padding: 14px 16px; }
-    }
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, maximum-scale=1">
+<meta name="theme-color" content="#05040a">
+<title>Intelligence — NexusAI v1</title>
+<link rel="icon" href="/favicon.png" type="image/png">
+<link rel="stylesheet" href="/aurora.css">
+<link rel="stylesheet" href="/site-extras.css">
+<script src="/config.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@600;700;800&family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg:#05040a; --text:#f4f0ff; --muted:#9b93b3;
+  --gold:#e8c87a; --line:rgba(255,255,255,.12);
+  --ai:#7dd3fc; --ai2:#c4b5fd; --user-g:linear-gradient(135deg,rgba(232,200,122,.22),rgba(120,60,200,.18));
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%;background:var(--bg);color:var(--text);font-family:Manrope,system-ui,sans-serif}
+body{display:flex;flex-direction:column;min-height:100dvh;overflow:hidden}
+a{color:inherit;text-decoration:none}
+.glass{
+  background:linear-gradient(165deg,rgba(255,255,255,.1),rgba(255,255,255,.03));
+  backdrop-filter:blur(48px) saturate(180%);
+  -webkit-backdrop-filter:blur(48px) saturate(180%);
+  border:1px solid rgba(255,255,255,.16);
+  box-shadow:0 10px 40px rgba(0,0,0,.35),inset 0 1px 0 rgba(255,255,255,.2);
+}
+.top{position:fixed;top:10px;left:50%;transform:translateX(-50%);z-index:50;width:min(1100px,calc(100% - 20px));padding:7px 12px 7px 14px;border-radius:16px}
+.nav{display:flex;align-items:center;gap:8px}
+.brand{display:flex;align-items:center;gap:8px;font-family:Unbounded,sans-serif;font-weight:700;font-size:13px;letter-spacing:.03em}
+.brand img{width:28px;height:28px;object-fit:contain;filter:drop-shadow(0 0 8px rgba(232,200,122,.5))}
+.brand b{color:var(--gold)}
+.links{display:flex;gap:1px;margin-left:auto;flex-wrap:wrap;justify-content:flex-end}
+.links a{font-size:12px;font-weight:600;color:var(--muted);padding:7px 10px;border-radius:10px;transition:.2s;white-space:nowrap}
+.links a:hover{color:#fff;background:rgba(255,255,255,.07)}
+.links a.active{color:#fff;background:rgba(125,211,252,.12);box-shadow:inset 0 0 0 1px rgba(125,211,252,.25)}
+.menu{display:none;width:40px;height:40px;border-radius:11px;border:1px solid var(--line);background:rgba(255,255,255,.06);color:#fff;cursor:pointer;font-size:16px;margin-left:auto;align-items:center;justify-content:center}
+@media(max-width:980px){
+  .menu{display:flex}
+  .links{display:none;position:fixed;top:64px;left:10px;right:10px;flex-direction:column;padding:12px;border-radius:16px;background:rgba(8,6,18,.97)!important;border:1px solid var(--line);z-index:60}
+  .links.open{display:flex!important}
+  .links a{padding:12px 14px;font-size:14px}
+}
 
-    /* Chat shell */
-    .ai-shell {
-      flex: 1; display: flex; flex-direction: column;
-      width: min(860px, calc(100% - 24px));
-      margin: 20px auto 24px; min-height: 0;
-    }
-    .ai-header {
-      text-align: center; padding: 12px 8px 18px;
-    }
-    .ai-badge {
-      display: inline-flex; align-items: center; gap: 8px;
-      padding: 6px 14px; border-radius: 999px; font-size: 11px; font-weight: 700;
-      letter-spacing: 0.12em; text-transform: uppercase;
-      background: rgba(125,211,252,0.1); border: 1px solid rgba(125,211,252,0.25);
-      color: #7dd3fc; margin-bottom: 12px;
-    }
-    .ai-badge .pulse {
-      width: 7px; height: 7px; border-radius: 50%; background: #37FFD0;
-      box-shadow: 0 0 10px #37FFD0; animation: blink 1.6s ease-in-out infinite;
-    }
-    @keyframes blink { 0%,100%{opacity:1} 50%{opacity:.35} }
-    .ai-header h1 {
-      font-family: Unbounded, sans-serif; font-size: clamp(1.4rem, 4vw, 1.85rem);
-      font-weight: 800; letter-spacing: -0.03em;
-      background: linear-gradient(135deg, #fff, #7dd3fc 45%, #a78bfa 90%);
-      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
-    }
-    .ai-header p { color: var(--muted); font-size: 0.92rem; margin-top: 6px; }
+/* FULL CHAT */
+.stage{flex:1;display:flex;flex-direction:column;width:min(980px,100%);margin:0 auto;padding:72px 12px 0;min-height:0;height:100dvh}
+.head{flex-shrink:0;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:8px 6px 14px}
+.head-left{display:flex;align-items:center;gap:12px}
+.avatar{
+  width:44px;height:44px;border-radius:14px;
+  background:linear-gradient(135deg,#7dd3fc,#a78bfa 55%,#f5d98a);
+  display:grid;place-items:center;font-family:Unbounded,sans-serif;font-weight:800;font-size:14px;color:#0b0a12;
+  box-shadow:0 0 24px rgba(125,211,252,.35);
+}
+.head h1{font-family:Unbounded,sans-serif;font-size:1.05rem;font-weight:700;line-height:1.2}
+.head h1 span{background:linear-gradient(90deg,#fff,#7dd3fc,#c4b5fd);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.head p{font-size:12px;color:var(--muted)}
+.live{display:inline-flex;align-items:center;gap:6px;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#37FFD0}
+.live i{width:7px;height:7px;border-radius:50%;background:#37FFD0;box-shadow:0 0 10px #37FFD0;animation:p 1.5s ease-in-out infinite}
+@keyframes p{50%{opacity:.35}}
 
-    .chat-frame {
-      position: relative; flex: 1; display: flex; flex-direction: column;
-      border-radius: 24px; min-height: 420px; overflow: hidden;
-    }
-    /* animated border */
-    .chat-frame::before {
-      content: ""; position: absolute; inset: 0; padding: 1px; border-radius: 24px;
-      background: conic-gradient(from var(--angle, 0deg), transparent 40%, #7dd3fc, #a78bfa, #f5d98a, transparent 60%);
-      -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
-      mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
-      -webkit-mask-composite: xor; mask-composite: exclude;
-      animation: spinBorder 4s linear infinite;
-      pointer-events: none; z-index: 1;
-    }
-    @property --angle {
-      syntax: '<angle>'; initial-value: 0deg; inherits: false;
-    }
-    @keyframes spinBorder { to { --angle: 360deg; } }
-    .chat-inner {
-      position: relative; z-index: 2; flex: 1; display: flex; flex-direction: column;
-      margin: 1px; border-radius: 23px; overflow: hidden;
-      background: linear-gradient(165deg, rgba(18,16,32,0.92), rgba(8,6,18,0.96));
-      backdrop-filter: blur(40px);
-    }
+.panel{
+  position:relative;flex:1;min-height:0;display:flex;flex-direction:column;
+  border-radius:22px;overflow:hidden;
+}
+.panel::before{
+  content:"";position:absolute;inset:0;border-radius:22px;padding:1.5px;pointer-events:none;z-index:3;
+  background:conic-gradient(from var(--a,0deg),transparent 0 35%,#7dd3fc,#a78bfa,#f5d98a,transparent 65% 100%);
+  -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);
+  mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);
+  -webkit-mask-composite:xor;mask-composite:exclude;
+  animation:spin 5s linear infinite;
+}
+@property --a{syntax:'<angle>';inherits:false;initial-value:0deg}
+@keyframes spin{to{--a:360deg}}
+.panel-bg{
+  position:absolute;inset:1px;border-radius:21px;z-index:0;
+  background:linear-gradient(180deg,rgba(16,14,28,.94),rgba(6,5,14,.98));
+  backdrop-filter:blur(40px);
+  border:1px solid rgba(255,255,255,.06);
+}
+.scroll{position:relative;z-index:1;flex:1;min-height:0;overflow-y:auto;padding:22px 18px 12px;display:flex;flex-direction:column;gap:16px}
+.scroll::-webkit-scrollbar{width:6px}
+.scroll::-webkit-scrollbar-thumb{background:rgba(125,211,252,.35);border-radius:8px}
 
-    .messages {
-      flex: 1; overflow-y: auto; padding: 20px 18px; display: flex; flex-direction: column; gap: 14px;
-      scroll-behavior: smooth;
-    }
-    .msg {
-      max-width: min(92%, 640px); padding: 12px 16px; border-radius: 16px; font-size: 0.95rem;
-      animation: msgIn 0.35s cubic-bezier(0.22,1,0.36,1);
-    }
-    @keyframes msgIn {
-      from { opacity: 0; transform: translateY(10px); }
-      to { opacity: 1; transform: none; }
-    }
-    .msg.user {
-      align-self: flex-end;
-      background: linear-gradient(135deg, rgba(232,200,122,0.18), rgba(100,50,180,0.15));
-      border: 1px solid rgba(232,200,122,0.28);
-      border-bottom-right-radius: 6px;
-    }
-    .msg.ai {
-      align-self: flex-start;
-      background: rgba(255,255,255,0.05);
-      border: 1px solid rgba(255,255,255,0.1);
-      border-bottom-left-radius: 6px;
-    }
-    .msg.ai .who {
-      font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase;
-      color: #7dd3fc; margin-bottom: 6px;
-    }
-    .msg .content h1.md-h1 {
-      font-family: Unbounded, sans-serif; font-size: 1.25rem; font-weight: 700;
-      margin: 8px 0 10px; color: #fff;
-    }
-    .msg .content h2.md-h2 {
-      font-family: Unbounded, sans-serif; font-size: 1.05rem; font-weight: 600;
-      margin: 8px 0 8px; color: #e0d8f0;
-    }
-    .msg .content p { margin: 0 0 8px; }
-    .msg .content ul { margin: 6px 0 10px 18px; color: var(--muted); }
-    .msg .content li { margin-bottom: 4px; }
-    .msg .content table {
-      width: 100%; border-collapse: collapse; margin: 10px 0; font-size: 0.85rem;
-    }
-    .msg .content th, .msg .content td {
-      padding: 8px 10px; border: 1px solid rgba(255,255,255,0.1); text-align: left;
-    }
-    .msg .content th { color: var(--gold); font-size: 11px; }
-    .hl-frame {
-      display: block; margin: 10px 0; padding: 12px 14px; border-radius: 12px;
-      background: linear-gradient(135deg, rgba(125,211,252,0.12), rgba(167,139,250,0.12), rgba(232,200,122,0.1));
-      border: 1px solid transparent;
-      background-clip: padding-box;
-      box-shadow: 0 0 0 1px rgba(125,211,252,0.25), inset 0 1px 0 rgba(255,255,255,0.1);
-      font-weight: 600; color: #f0f4ff;
-      animation: hlShift 6s ease infinite;
-      background-size: 200% 200%;
-    }
-    @keyframes hlShift {
-      0% { filter: hue-rotate(0deg); }
-      50% { filter: hue-rotate(25deg); }
-      100% { filter: hue-rotate(0deg); }
-    }
-    .typing {
-      align-self: flex-start; padding: 12px 16px; border-radius: 16px;
-      background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.08);
-      display: none; gap: 5px; align-items: center;
-    }
-    .typing.on { display: inline-flex; }
-    .typing i {
-      width: 6px; height: 6px; border-radius: 50%; background: #7dd3fc;
-      animation: bounce 1.2s ease-in-out infinite;
-    }
-    .typing i:nth-child(2) { animation-delay: 0.15s; }
-    .typing i:nth-child(3) { animation-delay: 0.3s; }
-    @keyframes bounce {
-      0%, 80%, 100% { transform: translateY(0); opacity: 0.4; }
-      40% { transform: translateY(-5px); opacity: 1; }
-    }
+.msg{max-width:min(100%,720px);animation:in .4s cubic-bezier(.22,1,.36,1)}
+@keyframes in{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+.msg.user{align-self:flex-end}
+.msg.ai{align-self:flex-start;width:min(100%,720px)}
+.bubble{
+  padding:14px 16px;border-radius:18px;font-size:15px;line-height:1.6;
+  word-wrap:break-word;overflow-wrap:anywhere;
+}
+.msg.user .bubble{
+  background:var(--user-g);border:1px solid rgba(232,200,122,.3);
+  border-bottom-right-radius:6px;color:#fff;
+}
+.msg.ai .bubble{
+  background:rgba(255,255,255,.045);border:1px solid rgba(255,255,255,.1);
+  border-bottom-left-radius:6px;
+}
+.who{font-size:10px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--ai);margin-bottom:8px}
 
-    .composer {
-      padding: 12px 14px 14px; border-top: 1px solid rgba(255,255,255,0.08);
-      display: flex; gap: 10px; align-items: flex-end;
-    }
-    .composer textarea {
-      flex: 1; min-height: 48px; max-height: 140px; resize: none;
-      padding: 12px 14px; border-radius: 14px;
-      border: 1px solid rgba(255,255,255,0.12);
-      background: rgba(0,0,0,0.35); color: #fff; font: inherit;
-      outline: none; line-height: 1.4;
-    }
-    .composer textarea:focus {
-      border-color: rgba(125,211,252,0.4);
-      box-shadow: 0 0 0 3px rgba(125,211,252,0.1);
-    }
-    .send-btn {
-      width: 48px; height: 48px; border-radius: 14px; border: none; cursor: pointer;
-      background: linear-gradient(135deg, #7dd3fc, #a78bfa);
-      color: #0a0818; font-size: 18px; font-weight: 700;
-      display: flex; align-items: center; justify-content: center;
-      transition: 0.2s; flex-shrink: 0;
-    }
-    .send-btn:hover { transform: scale(1.05); box-shadow: 0 8px 24px rgba(125,211,252,0.35); }
-    .send-btn:disabled { opacity: 0.45; cursor: not-allowed; transform: none; box-shadow: none; }
+/* markdown body */
+.md h1{font-family:Unbounded,sans-serif;font-size:1.35rem;font-weight:800;margin:14px 0 10px;letter-spacing:-.02em;color:#fff}
+.md h2{font-family:Unbounded,sans-serif;font-size:1.08rem;font-weight:700;margin:12px 0 8px;color:#e8e2f8}
+.md h3{font-family:Unbounded,sans-serif;font-size:.98rem;font-weight:600;margin:10px 0 6px;color:#d4cce8}
+.md p{margin:0 0 10px}
+.md p:last-child{margin-bottom:0}
+.md ul,.md ol{margin:6px 0 12px;padding-left:1.25rem;color:#c8c0d8}
+.md li{margin:4px 0}
+.md blockquote{
+  margin:10px 0;padding:10px 14px;border-left:3px solid var(--ai);
+  background:rgba(125,211,252,.06);border-radius:0 12px 12px 0;color:#c5d8ea
+}
+.md code{
+  font-family:JetBrains Mono,ui-monospace,monospace;font-size:.84em;
+  background:rgba(0,0,0,.4);padding:2px 7px;border-radius:6px;color:#f5d98a
+}
+.md pre{
+  margin:12px 0;padding:14px 16px;border-radius:14px;overflow-x:auto;
+  background:rgba(0,0,0,.45);border:1px solid rgba(255,255,255,.08);
+  font-family:JetBrains Mono,monospace;font-size:12.5px;line-height:1.5;color:#d6e4ff
+}
+.md pre code{background:none;padding:0;color:inherit}
+.md a{color:#7dd3fc;text-decoration:underline;text-underline-offset:3px}
+.md a:hover{color:#c4b5fd}
 
-    .err-toast {
-      position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%) translateY(20px);
-      max-width: min(420px, calc(100% - 32px));
-      padding: 14px 18px; border-radius: 14px; z-index: 9999;
-      background: rgba(40,12,20,0.95); border: 1px solid rgba(255,100,120,0.4);
-      color: #ffb4bc; font-size: 0.9rem; font-weight: 600;
-      opacity: 0; pointer-events: none; transition: 0.35s;
-      box-shadow: 0 12px 40px rgba(0,0,0,0.5);
-    }
-    .err-toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+/* INLINE key highlight — not a full-width block */
+.md .hl{
+  display:inline;padding:.12em .45em;margin:0 .1em;border-radius:7px;
+  font-weight:700;color:#fff;
+  background:linear-gradient(135deg,rgba(125,211,252,.28),rgba(196,181,253,.28),rgba(232,200,122,.22));
+  box-shadow:inset 0 0 0 1px rgba(255,255,255,.18);
+  -webkit-box-decoration-break:clone;box-decoration-break:clone;
+}
 
-    .suggest {
-      display: flex; flex-wrap: wrap; gap: 8px; padding: 0 14px 12px; justify-content: center;
-    }
-    .suggest button {
-      padding: 8px 12px; border-radius: 999px; font-size: 12px; font-weight: 600;
-      border: 1px solid rgba(255,255,255,0.12); background: rgba(255,255,255,0.05);
-      color: var(--muted); cursor: pointer; font-family: inherit; transition: 0.2s;
-    }
-    .suggest button:hover {
-      color: #fff; border-color: rgba(125,211,252,0.35); background: rgba(125,211,252,0.1);
-    }
-  </style>
+/* tables */
+.md .table-wrap{
+  margin:12px 0 14px;border-radius:14px;overflow:auto;
+  border:1px solid rgba(255,255,255,.12);
+  background:rgba(0,0,0,.25);
+}
+.md table{width:100%;border-collapse:collapse;font-size:13px;min-width:280px}
+.md th{
+  text-align:left;padding:11px 14px;font-size:11px;font-weight:700;letter-spacing:.04em;
+  text-transform:uppercase;color:var(--gold);
+  background:rgba(232,200,122,.08);border-bottom:1px solid rgba(255,255,255,.1)
+}
+.md td{padding:10px 14px;border-bottom:1px solid rgba(255,255,255,.06);color:#cfc6e0;vertical-align:top}
+.md tr:last-child td{border-bottom:none}
+.md tr:hover td{background:rgba(255,255,255,.03)}
+
+.typing{display:none;align-self:flex-start;gap:6px;padding:12px 16px;border-radius:16px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08)}
+.typing.on{display:inline-flex}
+.typing span{width:7px;height:7px;border-radius:50%;background:var(--ai);animation:b 1.1s ease-in-out infinite}
+.typing span:nth-child(2){animation-delay:.15s}
+.typing span:nth-child(3){animation-delay:.3s}
+@keyframes b{0%,80%,100%{transform:translateY(0);opacity:.35}40%{transform:translateY(-5px);opacity:1}}
+
+.foot{position:relative;z-index:2;flex-shrink:0;padding:10px 12px 14px;border-top:1px solid rgba(255,255,255,.07);background:rgba(5,4,12,.55);backdrop-filter:blur(16px)}
+.chips{display:flex;gap:8px;overflow-x:auto;padding-bottom:10px;scrollbar-width:none}
+.chips::-webkit-scrollbar{display:none}
+.chips button{
+  flex-shrink:0;padding:8px 13px;border-radius:999px;border:1px solid rgba(255,255,255,.12);
+  background:rgba(255,255,255,.05);color:var(--muted);font:600 12px Manrope,sans-serif;cursor:pointer;transition:.2s
+}
+.chips button:hover{color:#fff;border-color:rgba(125,211,252,.4);background:rgba(125,211,252,.1)}
+.composer{display:flex;gap:10px;align-items:flex-end}
+.composer textarea{
+  flex:1;min-height:52px;max-height:160px;resize:none;padding:14px 16px;border-radius:16px;
+  border:1px solid rgba(255,255,255,.14);background:rgba(0,0,0,.4);color:#fff;font:500 15px/1.45 Manrope,sans-serif;outline:none
+}
+.composer textarea:focus{border-color:rgba(125,211,252,.45);box-shadow:0 0 0 3px rgba(125,211,252,.12)}
+.send{
+  width:52px;height:52px;border:none;border-radius:16px;cursor:pointer;
+  background:linear-gradient(135deg,#7dd3fc,#a78bfa 60%,#e8c87a);color:#0a0814;font-size:20px;font-weight:800;
+  display:grid;place-items:center;transition:.2s;flex-shrink:0
+}
+.send:hover{transform:scale(1.04);box-shadow:0 10px 28px rgba(125,211,252,.35)}
+.send:disabled{opacity:.4;cursor:not-allowed;transform:none;box-shadow:none}
+
+.toast{
+  position:fixed;bottom:18px;left:50%;transform:translateX(-50%) translateY(16px);
+  max-width:min(440px,calc(100% - 24px));padding:13px 16px;border-radius:14px;z-index:100;
+  background:rgba(36,10,18,.96);border:1px solid rgba(255,110,130,.45);color:#ffc0c8;
+  font-size:13.5px;font-weight:600;opacity:0;pointer-events:none;transition:.35s;
+  box-shadow:0 16px 40px rgba(0,0,0,.45)
+}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+@media(max-width:600px){
+  .stage{padding:64px 8px 0}
+  .bubble{font-size:14.5px;padding:12px 14px}
+  .md h1{font-size:1.15rem}
+}
+</style>
 </head>
 <body>
-  <header class="top glass">
-    <nav class="nav">
-      <a class="brand" href="/index.html"><img src="/logo.png?v=2" alt="Nexus"> NEXUS <b>RP</b></a>
-      <button type="button" class="menu" aria-label="Меню">☰</button>
-      <div class="links">
-        <a href="/index.html">Главная</a>
-        <a href="/donate.html">Донат</a>
-        <a href="/discord.html">Discord</a>
-        <a href="/rules.html">Правила</a>
-        <a href="/news.html">Новости</a>
-        <a href="/team.html">Команда</a>
-        <a href="/m/nexus/intelligence.html" class="active">Intelligence</a>
-        <a href="/faq.html">FAQ</a>
-      </div>
-    </nav>
-  </header>
-
-  <div class="ai-shell">
-    <div class="ai-header">
-      <div class="ai-badge"><span class="pulse"></span> Online</div>
-      <h1>NexusAI v1</h1>
-      <p>Intelligence · правила, помощь по проекту, быстрые ответы</p>
+<header class="top glass">
+  <nav class="nav">
+    <a class="brand" href="/index.html"><img src="/logo.png?v=2" alt="">NEXUS <b>RP</b></a>
+    <button type="button" class="menu" aria-label="Меню">☰</button>
+    <div class="links">
+      <a href="/index.html">Главная</a>
+      <a href="/donate.html">Донат</a>
+      <a href="/discord.html">Discord</a>
+      <a href="/rules.html">Правила</a>
+      <a href="/news.html">Новости</a>
+      <a href="/team.html">Команда</a>
+      <a href="/m/nexus/intelligence.html" class="active">Intelligence</a>
+      <a href="/faq.html">FAQ</a>
     </div>
+  </nav>
+</header>
 
-    <div class="chat-frame">
-      <div class="chat-inner">
-        <div class="messages" id="messages">
-          <div class="msg ai">
-            <div class="who">NexusAI v1</div>
-            <div class="content">
-              <p>Привет. Я <strong>NexusAI v1</strong> — ассистент Nexus RP.</p>
-              <p>Спроси про правила, наказания, донат, Discord или старт в проекте.</p>
-            </div>
+<main class="stage">
+  <div class="head">
+    <div class="head-left">
+      <div class="avatar">AI</div>
+      <div>
+        <h1><span>NexusAI v1</span></h1>
+        <p>Intelligence · правила · проект · помощь</p>
+      </div>
+    </div>
+    <div class="live"><i></i> Online</div>
+  </div>
+
+  <div class="panel">
+    <div class="panel-bg"></div>
+    <div class="scroll" id="scroll">
+      <div class="msg ai">
+        <div class="bubble">
+          <div class="who">NexusAI v1</div>
+          <div class="md">
+            <p>Привет — я <span class="hl">NexusAI v1</span>, ассистент Nexus RP.</p>
+            <p>Спроси про правила, наказания, донат или Discord. Могу оформить ответ таблицей и выделить важное.</p>
           </div>
         </div>
-        <div class="typing" id="typing"><i></i><i></i><i></i></div>
-        <div class="suggest" id="suggest">
-          <button type="button" data-q="Что такое DM и какое наказание?">DM и наказание</button>
-          <button type="button" data-q="Расскажи про донат Nexus ELITE">Донат</button>
-          <button type="button" data-q="Сравни SK и RK в таблице">SK vs RK</button>
-          <button type="button" data-q="Как зайти в Discord проекта?">Discord</button>
-        </div>
-        <div class="composer">
-          <textarea id="input" rows="1" placeholder="Сообщение для NexusAI…" maxlength="4000"></textarea>
-          <button type="button" class="send-btn" id="send" title="Отправить">↑</button>
-        </div>
+      </div>
+    </div>
+    <div class="typing" id="typing"><span></span><span></span><span></span></div>
+    <div class="foot">
+      <div class="chips" id="chips">
+        <button type="button" data-q="Что такое DM и какое наказание?">DM</button>
+        <button type="button" data-q="Сравни SK, RK и TK в таблице">SK / RK / TK</button>
+        <button type="button" data-q="Как правильно задонатить Nexus ELITE?">Донат</button>
+        <button type="button" data-q="Ссылка на Discord и что там есть">Discord</button>
+        <button type="button" data-q="Кратко: базовые RP-правила списком">База RP</button>
+      </div>
+      <div class="composer">
+        <textarea id="input" rows="1" placeholder="Напиши NexusAI…" maxlength="4000"></textarea>
+        <button type="button" class="send" id="send" title="Отправить">↑</button>
       </div>
     </div>
   </div>
-
-  <div class="err-toast" id="errToast"></div>
-
-  <script src="/site.js" defer></script>
-  <script>
-(function () {
-  var API_KEY = "OdXJBvpcl2mslGP9R2SPJ5Dvw6Y8ecLovrF72cKhxe3rAhN5WzUmNpvtLIvUE9pFFWT/d+nqMoYN+FsDVfdmoaVOB4yPjcnVJULXm0oagVUzeWvUMWB8XA0rlSU8J6CCXVgue0R1RoBO2ixsN/bci9wt";
+</main>
+<div class="toast" id="toast"></div>
+<script src="/site.js" defer></script>
+<script>
+(function(){
+  var KEY = "OdXJBvpcl2mslGP9R2SPJ5Dvw6Y8ecLovrF72cKhxe3rAhN5WzUmNpvtLIvUE9pFFWT/d+nqMoYN+FsDVfdmoaVOB4yPjcnVJULXm0oagVUzeWvUMWB8XA0rlSU8J6CCXVgue0R1RoBO2ixsN/bci9wt";
   var BASE = "https://api.llm7.io/v1";
   var MODEL = "default";
-  var SYSTEM = "Ты — NexusAI v1, официальный ИИ-ассистент проекта Nexus RP (Roblox RolePlay).\nВсегда представляйся только как NexusAI v1. Никогда не называй провайдера модели, API или сторонние сервисы. Ты создан командой Nexus.\n\nГовори на русском, ясно и по делу. Будь дружелюбным, но строгим в вопросах правил.\n\nЗНАНИЯ О ПРОЕКТЕ И ПРАВИЛАХ (используй всегда, не выдумывай противоречащее):\n\nПРАВИЛА NEXUS RP (Roblox RolePlay):\n\n=== Основные RP ===\n1.1 DM (DeathMatch) — урон/убийство без RP-причины → Demorgan 60–120 мин\n1.2 DB (DriveBy) — урон транспортом / стрельба с водителя → Demorgan 45–90 мин\n1.3 PG (PowerGaming) — преувеличение возможностей (1в3+, игнор травм) → Demorgan 60 мин / WARN\n1.4 SK (SpawnKill) — убийство на спавне / у интерьеров фракций → WARN / Ban 3 дня\n1.5 TK (TeamKill) — урон своей фракции → Demorgan 120 мин / WARN\n1.6 NRP (NonRP) — нарушение логики мира / бессмысленное поведение → Demorgan 30–90 мин\n1.7 RK (Revenge Kill) — месть за смерть или возврат на место смерти <15 мин → Demorgan 60 мин\n1.8 MG (MetaGaming) — OOC-инфа в IC → Demorgan 30 мин\n1.9 Mass DM — 3+ игроков без причины → Ban 7–15 дней\n1.10 OffRP — выход/AFK при погоне, задержании, перестрелке → WARN / Ban 3 дня\n1.11 NRD — езда по горам, таран, без колёс → Demorgan 40 мин\n1.12 Bug Abuse — использование багов → Demorgan 120 мин / Ban 7 дней\n1.13 NonRP Gun — крупное оружие без отыгровки → Demorgan 30 мин\n1.14 RDM — хаотичная стрельба по потоку → Demorgan 120 мин / Ban 3 дня\n1.15 CK — character kill только через форум → по согласованию\n\n=== ПГО ===\n1.1 Криминал для гос. без темы на форуме → WARN\n1.2 Крим/взятки руководства → WARN / Demorgan 9–24 ч\n1.3 Взятка >100.000 игровой валюты → WARN\n1.4 Слив склада → Demorgan 3 дня / Ban / PermBan\n1.5 Служебный транспорт в личных целях → Demorgan 120 мин / Выговор\n1.6 Прогул в форме (казино/рынок) → Увольнение / WARN\n2.1 Миранда: не зачитал права → WARN/Ban от 1 дня; отказ в адвокате → Ban 1–3 дня\n2.4 Задержание без статьи/удостоверения → Demorgan 1–3 часа\n3.3 Тайзер по авто/мото в движении → WARN\n3.4 Тайзер в бою под огнём → WARN\n4.4 МВД патруль на незарегистрированном личном авто → Demorgan 120 мин\n5.3 ФСБ без маски на спецоперации → Demorgan 30 мин / NRP\n6.4 Неверные решения суда → Ban 3–30 дней\n\n=== Прочее ===\nЧиты → HardBan 30 дней / PermBan\nОскорбление родных → Ban 7–30 дней\nПродажа виртов → PermBan\nОбман администрации → Ban 15–30 дней\nОбход наказаний (твинки) → HardBan 30 дней\nAFK Road → Kick\n\n=== Проект ===\nNexus RP — Roblox RolePlay проект. Сайт: play.nexusroleplay.ru\nDiscord: https://discord.gg/gRdeVkG5vf\nДонат: CloudTips Nexus ELITE https://pay.cloudtips.ru/p/3eaaca3d (218₽, выключить комиссию)\nКоманда: wornet (Основатель, Dev), coldcash и moxitopc (Совет директоров), med1aprod (COO, PR, Dev)\nСервер готовится к открытию. Основное общение — Discord.\n\n\nФОРМАТИРОВАНИЕ ОТВЕТОВ (обязательно соблюдай):\n- Строка, начинающаяся с \"# \" — крупный заголовок\n- Строка с \"## \" — подзаголовок меньше\n- Текст в **двойных звёздочках** — только ключевые факты (наказания, важные цифры, выводы). На сайте они отображаются в особой градиентной рамке. Не оборачивай в ** обычные предложения.\n- Таблицы Markdown (| col | col |) — для сравнений правил и наказаний\n- Списки с \"- \" при перечислениях\n- Не используй HTML-теги\n\nЕсли не знаешь точного пункта — скажи честно и посоветуй страницу Правил или Discord.\nНе поощряй читы, обход правил или реальный вред.\n";
-
-  var history = [{ role: 'system', content: SYSTEM }];
+  var SYSTEM = "Ты — NexusAI v1, официальный ИИ проекта Nexus RP (Roblox RolePlay).\nВсегда называй себя только NexusAI v1. Не упоминай провайдеров, API, LLM7 или другие модели.\n\nЯзык: русский. Стиль: чёткий, полезный, современный.\n\nЗНАНИЯ:\n\nПРАВИЛА NEXUS RP (Roblox RolePlay):\n1.1 DM — урон/убийство без RP → Demorgan 60–120 мин\n1.2 DB — урон транспортом / стрельба с водителя → Demorgan 45–90 мин\n1.3 PG — powergaming → Demorgan 60 мин / WARN\n1.4 SK — spawnkill → WARN / Ban 3 дня\n1.5 TK — teamkill → Demorgan 120 мин / WARN\n1.6 NRP — nonRP поведение → Demorgan 30–90 мин\n1.7 RK — revenge kill / возврат <15 мин → Demorgan 60 мин\n1.8 MG — metagaming → Demorgan 30 мин\n1.9 Mass DM — 3+ без причины → Ban 7–15 дней\n1.10 OffRP — уход при погоне/аресте → WARN / Ban 3 дня\n1.11 NRD — nonRP drive → Demorgan 40 мин\n1.12 Bug Abuse → Demorgan 120 мин / Ban 7 дней\n1.13 NonRP Gun → Demorgan 30 мин\n1.14 RDM → Demorgan 120 мин / Ban 3 дня\n1.15 CK — только форум → по согласованию\nПГО: криминал гос без темы WARN; взятка >100к игровой валюты WARN; слив склада Ban/PermBan; Миранда WARN/Ban; тайзер по авто WARN; и др.\nЧиты HardBan/PermBan; оскорбление родных Ban 7–30; вирты PermBan.\nПроект: Nexus RP Roblox. Discord https://discord.gg/gRdeVkG5vf\nДонат Nexus ELITE CloudTips https://pay.cloudtips.ru/p/3eaaca3d — 218₽, выключить комиссию.\nКоманда: wornet основатель; coldcash, moxitopc совет директоров; med1aprod COO/PR/Dev.\n\n\nРАЗМЕТКА (строго):\n- # заголовок крупный\n- ## подзаголовок\n- **фрагмент** — только короткие ключевые факты (срок наказания, важное число). Это INLINE-акцент, не отдельная «простыня». Не оборачивай целые абзацы.\n- [текст](https://url) — ссылки\n- Таблицы Markdown с | заголовок | и разделителем |---|\n- Списки -, нумерованные 1.\n- `код` инлайн, ``` блоки кода\n- > цитата\n\nНе используй HTML. Не выдумывай правила. Если не уверен — скажи и отправь на /rules.html или Discord.\n";
+  var history = [{role:"system",content:SYSTEM}];
   var busy = false;
+  var scroll = document.getElementById("scroll");
+  var input = document.getElementById("input");
+  var sendBtn = document.getElementById("send");
+  var typing = document.getElementById("typing");
+  var toast = document.getElementById("toast");
 
-  var messagesEl = document.getElementById('messages');
-  var input = document.getElementById('input');
-  var sendBtn = document.getElementById('send');
-  var typing = document.getElementById('typing');
-  var errToast = document.getElementById('errToast');
-
-  function showErr(msg) {
-    errToast.textContent = msg;
-    errToast.classList.add('show');
-    setTimeout(function () { errToast.classList.remove('show'); }, 4500);
+  function showErr(m){
+    toast.textContent = m;
+    toast.classList.add("show");
+    setTimeout(function(){toast.classList.remove("show");},4800);
+  }
+  function esc(s){
+    return String(s||"").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");
   }
 
-  function renderMd(text) {
-    var lines = String(text || '').split('\n');
-    var html = '';
-    var inTable = false;
-    var tableRows = [];
+  /* ---- Markdown renderer ---- */
+  function inlineMd(s){
+    s = esc(s);
+    // links [text](url)
+    s = s.replace(/\[([^\]]+)\]\((https?:\/\/[^)\s]+)\)/g, '<a href="$2" target="_blank" rel="noopener">$1</a>');
+    // auto bare urls
+    s = s.replace(/(^|[\s(])((https?:\/\/)[^\s<]+)/g, function(_, pre, url){
+      return pre + '<a href="'+url+'" target="_blank" rel="noopener">'+url+'</a>';
+    });
+    // bold ** → inline hl
+    s = s.replace(/\*\*(.+?)\*\*/g, '<span class="hl">$1</span>');
+    // italic * *
+    s = s.replace(/(^|[^\*])\*([^\*\n]+)\*(?!\*)/g, '$1<em>$2</em>');
+    // inline code
+    s = s.replace(/`([^`]+)`/g, '<code>$1</code>');
+    return s;
+  }
 
-    function flushTable() {
-      if (!tableRows.length) return;
-      html += '<table>';
-      tableRows.forEach(function (row, idx) {
-        var cells = row.split('|').map(function (c) { return c.trim(); }).filter(function (c, i, a) {
-          return c.length || (i > 0 && i < a.length - 1);
-        });
-        // skip separator |---|
-        if (cells.every(function (c) { return /^[\-:]+$/.test(c); })) return;
-        var tag = idx === 0 ? 'th' : 'td';
-        html += '<tr>' + cells.map(function (c) {
-          return '<' + tag + '>' + inlineFormat(c) + '</' + tag + '>';
-        }).join('') + '</tr>';
-      });
-      html += '</table>';
-      tableRows = [];
-      inTable = false;
-    }
+  function renderMd(raw){
+    raw = String(raw||"").replace(/\r\n/g,"\n");
+    // fenced code
+    var parts = [];
+    raw = raw.replace(/```([\w-]*)\n?([\s\S]*?)```/g, function(_, lang, code){
+      var i = parts.length;
+      parts.push('<pre><code>'+esc(code.replace(/\n$/,""))+'</code></pre>');
+      return "\n%%PART"+i+"%%\n";
+    });
 
-    function inlineFormat(s) {
-      // **key** frames
-      s = s.replace(/\*\*(.+?)\*\*/g, '<span class="hl-frame">$1</span>');
-      s = s.replace(/`([^`]+)`/g, '<code style="font-family:JetBrains Mono,monospace;font-size:0.85em;background:rgba(0,0,0,0.35);padding:2px 6px;border-radius:6px">$1</code>');
-      return s;
-    }
-
-    for (var i = 0; i < lines.length; i++) {
+    var lines = raw.split("\n");
+    var html = "";
+    var i = 0;
+    while(i < lines.length){
       var line = lines[i];
-      if (line.indexOf('|') !== -1 && line.trim().charAt(0) === '|') {
-        inTable = true;
-        tableRows.push(line);
+      var t = line.trim();
+
+      if(/^%%PART\d+%%$/.test(t)){
+        html += parts[+t.replace(/\D/g,"")]; i++; continue;
+      }
+      if(/^###\s+/.test(line)){ html += "<h3>"+inlineMd(line.replace(/^###\s+/,""))+"</h3>"; i++; continue; }
+      if(/^##\s+/.test(line)){ html += "<h2>"+inlineMd(line.replace(/^##\s+/,""))+"</h2>"; i++; continue; }
+      if(/^#\s+/.test(line)){ html += "<h1>"+inlineMd(line.replace(/^#\s+/,""))+"</h1>"; i++; continue; }
+      if(/^>\s?/.test(line)){
+        var q = [];
+        while(i<lines.length && /^>\s?/.test(lines[i])){ q.push(lines[i].replace(/^>\s?/, "")); i++; }
+        html += "<blockquote>"+inlineMd(q.join(" "))+"</blockquote>";
         continue;
-      } else if (inTable) {
-        flushTable();
       }
-      if (/^#\s+/.test(line)) {
-        html += '<h1 class="md-h1">' + inlineFormat(line.replace(/^#\s+/, '')) + '</h1>';
-      } else if (/^##\s+/.test(line)) {
-        html += '<h2 class="md-h2">' + inlineFormat(line.replace(/^##\s+/, '')) + '</h2>';
-      } else if (/^[-*]\s+/.test(line)) {
-        // collect list
-        html += '<ul>';
-        while (i < lines.length && /^[-*]\s+/.test(lines[i])) {
-          html += '<li>' + inlineFormat(lines[i].replace(/^[-*]\s+/, '')) + '</li>';
-          i++;
+      // table
+      if(t.indexOf("|") !== -1 && t.charAt(0) === "|"){
+        var rows = [];
+        while(i<lines.length && lines[i].indexOf("|") !== -1){
+          rows.push(lines[i]); i++;
         }
-        i--;
-        html += '</ul>';
-      } else if (line.trim() === '') {
-        html += '';
-      } else {
-        html += '<p>' + inlineFormat(line) + '</p>';
+        html += renderTable(rows);
+        continue;
       }
+      // lists
+      if(/^[-*]\s+/.test(line)){
+        html += "<ul>";
+        while(i<lines.length && /^[-*]\s+/.test(lines[i])){
+          html += "<li>"+inlineMd(lines[i].replace(/^[-*]\s+/,""))+"</li>"; i++;
+        }
+        html += "</ul>"; continue;
+      }
+      if(/^\d+\.\s+/.test(line)){
+        html += "<ol>";
+        while(i<lines.length && /^\d+\.\s+/.test(lines[i])){
+          html += "<li>"+inlineMd(lines[i].replace(/^\d+\.\s+/,""))+"</li>"; i++;
+        }
+        html += "</ol>"; continue;
+      }
+      if(t === ""){ i++; continue; }
+      // paragraph: merge soft-wrapped lines
+      var p = [line];
+      i++;
+      while(i<lines.length && lines[i].trim() !== "" && !/^#{1,3}\s/.test(lines[i]) && !/^[-*]\s/.test(lines[i]) && !/^\d+\.\s/.test(lines[i]) && !(lines[i].trim().charAt(0)==="|" && lines[i].indexOf("|")!==-1) && !/^>\s?/.test(lines[i]) && !/^%%PART/.test(lines[i].trim()) && !/^```/.test(lines[i])){
+        p.push(lines[i]); i++;
+      }
+      html += "<p>"+inlineMd(p.join(" "))+"</p>";
     }
-    flushTable();
-    return html || '<p></p>';
+    return html || "<p></p>";
   }
 
-  function addMsg(role, text) {
-    var div = document.createElement('div');
-    div.className = 'msg ' + (role === 'user' ? 'user' : 'ai');
-    if (role === 'assistant') {
-      div.innerHTML = '<div class="who">NexusAI v1</div><div class="content">' + renderMd(text) + '</div>';
+  function renderTable(rows){
+    var parsed = rows.map(function(r){
+      return r.split("|").map(function(c){return c.trim();}).filter(function(c,i,a){ return !(i===0&&c==="") && !(i===a.length-1&&c===""); });
+    }).filter(function(cells){ return cells.length; });
+    if(parsed.length < 1) return "";
+    // drop separator row
+    var body = parsed.filter(function(cells, idx){
+      if(idx===0) return true;
+      return !cells.every(function(c){ return /^:?-+:?$/.test(c); });
+    });
+    if(!body.length) return "";
+    var head = body[0];
+    var out = '<div class="table-wrap"><table><thead><tr>';
+    head.forEach(function(c){ out += "<th>"+inlineMd(c)+"</th>"; });
+    out += "</tr></thead><tbody>";
+    for(var r=1;r<body.length;r++){
+      out += "<tr>";
+      for(var c=0;c<head.length;c++){
+        out += "<td>"+inlineMd(body[r][c]||"")+"</td>";
+      }
+      out += "</tr>";
+    }
+    out += "</tbody></table></div>";
+    return out;
+  }
+
+  function addMsg(role, text){
+    var wrap = document.createElement("div");
+    wrap.className = "msg "+(role==="user"?"user":"ai");
+    if(role==="user"){
+      wrap.innerHTML = '<div class="bubble"></div>';
+      wrap.querySelector(".bubble").textContent = text;
     } else {
-      div.innerHTML = '<div class="content"><p></p></div>';
-      div.querySelector('p').textContent = text;
+      wrap.innerHTML = '<div class="bubble"><div class="who">NexusAI v1</div><div class="md"></div></div>';
+      wrap.querySelector(".md").innerHTML = renderMd(text);
     }
-    messagesEl.appendChild(div);
-    messagesEl.scrollTop = messagesEl.scrollHeight;
-    return div;
+    // insert before typing indicator's place — typing is outside scroll, so just append
+    scroll.appendChild(wrap);
+    scroll.scrollTop = scroll.scrollHeight;
   }
 
-  function setBusy(v) {
+  function setBusy(v){
     busy = v;
     sendBtn.disabled = v;
-    typing.classList.toggle('on', v);
+    typing.classList.toggle("on", v);
+    if(v){ scroll.appendChild(typing); scroll.scrollTop = scroll.scrollHeight; }
   }
 
-  function send(text) {
-    text = (text || input.value || '').trim();
-    if (!text || busy) return;
-    input.value = '';
-    autoSize();
-    addMsg('user', text);
-    history.push({ role: 'user', content: text });
+  // move typing into scroll flow visually
+  typing.style.alignSelf = "flex-start";
+  typing.style.margin = "0 0 4px";
+
+  function send(text){
+    text = (text || input.value || "").trim();
+    if(!text || busy) return;
+    input.value = "";
+    autosize();
+    addMsg("user", text);
+    history.push({role:"user", content:text});
     setBusy(true);
 
-    fetch(BASE + '/chat/completions', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': 'Bearer ' + API_KEY
-      },
-      body: JSON.stringify({
-        model: MODEL,
-        messages: history,
-        temperature: 0.6,
-        max_tokens: 2048
-      })
-    }).then(function (res) {
-      return res.json().then(function (data) {
-        if (!res.ok) {
-          var msg = (data && (data.error && data.error.message || data.message)) || ('Ошибка API ' + res.status);
-          throw new Error(msg);
+    fetch(BASE + "/chat/completions", {
+      method:"POST",
+      headers:{"Content-Type":"application/json","Authorization":"Bearer "+KEY},
+      body:JSON.stringify({model:MODEL, messages:history, temperature:0.55, max_tokens:2500})
+    }).then(function(res){
+      return res.json().then(function(data){
+        if(!res.ok){
+          var m = (data && data.error && (data.error.message||data.error)) || data.message || ("HTTP "+res.status);
+          throw new Error(typeof m === "string" ? m : JSON.stringify(m));
         }
         return data;
       });
-    }).then(function (data) {
-      var reply = '';
-      try {
-        reply = data.choices[0].message.content || '';
-      } catch (e) {
-        throw new Error('Пустой ответ модели');
-      }
-      // force identity if model drifts
-      if (!/NexusAI/i.test(reply) && reply.length < 40) {
-        reply = 'NexusAI v1: ' + reply;
-      }
-      history.push({ role: 'assistant', content: reply });
-      // trim history growth (keep system + last 20)
-      if (history.length > 22) {
-        history = [history[0]].concat(history.slice(-20));
-      }
-      addMsg('assistant', reply);
-    }).catch(function (err) {
-      showErr('NexusAI: ' + (err.message || 'не удалось получить ответ. Попробуй ещё раз.'));
-      addMsg('assistant', '**Временный сбой связи.**\n\nПопробуй повторить запрос через несколько секунд. Если ошибка повторяется — напиши в Discord проекта.');
-    }).finally(function () {
-      setBusy(false);
-    });
+    }).then(function(data){
+      var reply = "";
+      try{ reply = data.choices[0].message.content || ""; }catch(e){ throw new Error("Пустой ответ"); }
+      history.push({role:"assistant", content:reply});
+      if(history.length > 24) history = [history[0]].concat(history.slice(-22));
+      addMsg("assistant", reply);
+    }).catch(function(err){
+      showErr("NexusAI: "+(err.message||"сбой сети"));
+      addMsg("assistant", "## Сбой связи\n\n**Не удалось получить ответ.** Попробуй ещё раз или зайди в [Discord](https://discord.gg/gRdeVkG5vf).");
+    }).finally(function(){ setBusy(false); });
   }
 
-  function autoSize() {
-    input.style.height = 'auto';
-    input.style.height = Math.min(140, input.scrollHeight) + 'px';
+  function autosize(){
+    input.style.height = "auto";
+    input.style.height = Math.min(160, Math.max(52, input.scrollHeight))+"px";
   }
-
-  sendBtn.addEventListener('click', function () { send(); });
-  input.addEventListener('input', autoSize);
-  input.addEventListener('keydown', function (e) {
-    if (e.key === 'Enter' && !e.shiftKey) {
-      e.preventDefault();
-      send();
-    }
+  sendBtn.addEventListener("click", function(){ send(); });
+  input.addEventListener("input", autosize);
+  input.addEventListener("keydown", function(e){
+    if(e.key==="Enter" && !e.shiftKey){ e.preventDefault(); send(); }
   });
-  document.getElementById('suggest').addEventListener('click', function (e) {
-    var b = e.target.closest('button[data-q]');
-    if (b) send(b.getAttribute('data-q'));
+  document.getElementById("chips").addEventListener("click", function(e){
+    var b = e.target.closest("button[data-q]");
+    if(b) send(b.getAttribute("data-q"));
   });
-
-  // mobile menu
-  var btn = document.querySelector('.menu');
-  var links = document.querySelector('.links');
-  if (btn && links) {
-    btn.addEventListener('click', function (e) {
-      e.stopPropagation();
-      links.classList.toggle('open');
-    });
-    document.addEventListener('click', function (e) {
-      if (!links.contains(e.target) && e.target !== btn) links.classList.remove('open');
-    });
+  var menu=document.querySelector(".menu"), links=document.querySelector(".links");
+  if(menu&&links){
+    menu.addEventListener("click", function(e){ e.stopPropagation(); links.classList.toggle("open"); });
+    document.addEventListener("click", function(e){ if(!links.contains(e.target)&&e.target!==menu) links.classList.remove("open"); });
   }
 })();
-  </script>
+</script>
 </body>
 </html>
