@@ -2,8 +2,21 @@
   "cleanUrls": true,
   "trailingSlash": false,
   "rewrites": [
-    { "source": "/not-approved", "destination": "/not-approved.html" },
-    { "source": "/apps/adminroleplay", "destination": "/apps/adminroleplay/index.html" },
-    { "source": "/apps/adminroleplay/", "destination": "/apps/adminroleplay/index.html" }
+    {
+      "source": "/not-approved",
+      "destination": "/not-approved.html"
+    },
+    {
+      "source": "/apps/adminroleplay",
+      "destination": "/apps/adminroleplay/index.html"
+    },
+    {
+      "source": "/apps/adminroleplay/",
+      "destination": "/apps/adminroleplay/index.html"
+    },
+    {
+      "source": "/m/nexus/intelligence",
+      "destination": "/m/nexus/intelligence.html"
+    }
   ]
 }

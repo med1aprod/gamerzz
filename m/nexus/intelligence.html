@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<script>
+  if (window.location.hostname === 'nexusroleplay.ru' || window.location.hostname === 'www.nexusroleplay.ru') {
+    window.location.replace('https://play.nexusroleplay.ru' + window.location.pathname + window.location.search + window.location.hash);
+  }
+</script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#05040a">
+  <link rel="icon" href="/favicon.png" type="image/png">
+  <link rel="stylesheet" href="/aurora.css">
+  <link rel="stylesheet" href="/site-extras.css">
+  <script src="/config.js"></script>
+  <title>Intelligence — NexusAI v1</title>
+  <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;600;700;800&family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #05040a; --text: #f4f0ff; --muted: #a39bb8;
+      --gold: #e8c87a; --gold-bright: #f5d98a;
+      --ai: #7dd3fc; --ai2: #a78bfa;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { height: 100%; }
+    body {
+      background: var(--bg); color: var(--text);
+      font-family: Manrope, system-ui, sans-serif;
+      min-height: 100vh; overflow-x: hidden; line-height: 1.55;
+      display: flex; flex-direction: column;
+    }
+    a { color: inherit; text-decoration: none; }
+    .glass {
+      background: linear-gradient(165deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.035) 100%);
+      backdrop-filter: blur(50px) saturate(200%) brightness(1.12);
+      -webkit-backdrop-filter: blur(50px) saturate(200%) brightness(1.12);
+      border: 1px solid rgba(255,255,255,0.18);
+      box-shadow: 0 12px 40px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.28);
+    }
+    .top {
+      position: sticky; top: 12px; z-index: 100;
+      margin: 12px auto 0; width: min(1140px, calc(100% - 24px));
+      padding: 8px 12px 8px 16px; border-radius: 18px;
+    }
+    .nav { display: flex; align-items: center; gap: 10px; position: relative; }
+    .brand {
+      display: flex; align-items: center; gap: 10px;
+      font-family: Unbounded, sans-serif; font-weight: 700; letter-spacing: 0.03em; font-size: 14px;
+    }
+    .brand img { width: 32px; height: 32px; object-fit: contain; filter: drop-shadow(0 0 8px rgba(232,200,122,0.55)); }
+    .brand b { color: var(--gold-bright); }
+    .links { display: flex; gap: 2px; margin-left: auto; align-items: center; flex-wrap: wrap; }
+    .links a {
+      font-size: 13px; font-weight: 600; color: var(--muted);
+      padding: 8px 11px; border-radius: 11px; transition: 0.2s; white-space: nowrap;
+    }
+    .links a:hover { color: #fff; background: rgba(255,255,255,0.07); }
+    .links a.active {
+      color: #fff; background: rgba(255,255,255,0.1);
+      box-shadow: inset 0 0 0 1px rgba(255,255,255,0.14);
+    }
+    .menu {
+      display: none; margin-left: auto; width: 44px; height: 44px;
+      border: 1px solid rgba(255,255,255,0.14); background: rgba(255,255,255,0.08);
+      color: white; border-radius: 12px; cursor: pointer; font-size: 18px;
+      align-items: center; justify-content: center;
+    }
+    @media (max-width: 960px) {
+      .menu { display: flex; }
+      .links {
+        display: none; position: fixed; top: 72px; left: 12px; right: 12px;
+        flex-direction: column; gap: 6px; padding: 14px; border-radius: 18px; z-index: 999;
+        background: rgba(6,5,14,0.97) !important; border: 1px solid rgba(255,255,255,0.14);
+      }
+      .links.open { display: flex !important; }
+      .links a { width: 100%; padding: 14px 16px; }
+    }
+
+    /* Chat shell */
+    .ai-shell {
+      flex: 1; display: flex; flex-direction: column;
+      width: min(860px, calc(100% - 24px));
+      margin: 20px auto 24px; min-height: 0;
+    }
+    .ai-header {
+      text-align: center; padding: 12px 8px 18px;
+    }
+    .ai-badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 6px 14px; border-radius: 999px; font-size: 11px; font-weight: 700;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      background: rgba(125,211,252,0.1); border: 1px solid rgba(125,211,252,0.25);
+      color: #7dd3fc; margin-bottom: 12px;
+    }
+    .ai-badge .pulse {
+      width: 7px; height: 7px; border-radius: 50%; background: #37FFD0;
+      box-shadow: 0 0 10px #37FFD0; animation: blink 1.6s ease-in-out infinite;
+    }
+    @keyframes blink { 0%,100%{opacity:1} 50%{opacity:.35} }
+    .ai-header h1 {
+      font-family: Unbounded, sans-serif; font-size: clamp(1.4rem, 4vw, 1.85rem);
+      font-weight: 800; letter-spacing: -0.03em;
+      background: linear-gradient(135deg, #fff, #7dd3fc 45%, #a78bfa 90%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    }
+    .ai-header p { color: var(--muted); font-size: 0.92rem; margin-top: 6px; }
+
+    .chat-frame {
+      position: relative; flex: 1; display: flex; flex-direction: column;
+      border-radius: 24px; min-height: 420px; overflow: hidden;
+    }
+    /* animated border */
+    .chat-frame::before {
+      content: ""; position: absolute; inset: 0; padding: 1px; border-radius: 24px;
+      background: conic-gradient(from var(--angle, 0deg), transparent 40%, #7dd3fc, #a78bfa, #f5d98a, transparent 60%);
+      -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+      mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+      -webkit-mask-composite: xor; mask-composite: exclude;
+      animation: spinBorder 4s linear infinite;
+      pointer-events: none; z-index: 1;
+    }
+    @property --angle {
+      syntax: '<angle>'; initial-value: 0deg; inherits: false;
+    }
+    @keyframes spinBorder { to { --angle: 360deg; } }
+    .chat-inner {
+      position: relative; z-index: 2; flex: 1; display: flex; flex-direction: column;
+      margin: 1px; border-radius: 23px; overflow: hidden;
+      background: linear-gradient(165deg, rgba(18,16,32,0.92), rgba(8,6,18,0.96));
+      backdrop-filter: blur(40px);
+    }
+
+    .messages {
+      flex: 1; overflow-y: auto; padding: 20px 18px; display: flex; flex-direction: column; gap: 14px;
+      scroll-behavior: smooth;
+    }
+    .msg {
+      max-width: min(92%, 640px); padding: 12px 16px; border-radius: 16px; font-size: 0.95rem;
+      animation: msgIn 0.35s cubic-bezier(0.22,1,0.36,1);
+    }
+    @keyframes msgIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: none; }
+    }
+    .msg.user {
+      align-self: flex-end;
+      background: linear-gradient(135deg, rgba(232,200,122,0.18), rgba(100,50,180,0.15));
+      border: 1px solid rgba(232,200,122,0.28);
+      border-bottom-right-radius: 6px;
+    }
+    .msg.ai {
+      align-self: flex-start;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-bottom-left-radius: 6px;
+    }
+    .msg.ai .who {
+      font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase;
+      color: #7dd3fc; margin-bottom: 6px;
+    }
+    .msg .content h1.md-h1 {
+      font-family: Unbounded, sans-serif; font-size: 1.25rem; font-weight: 700;
+      margin: 8px 0 10px; color: #fff;
+    }
+    .msg .content h2.md-h2 {
+      font-family: Unbounded, sans-serif; font-size: 1.05rem; font-weight: 600;
+      margin: 8px 0 8px; color: #e0d8f0;
+    }
+    .msg .content p { margin: 0 0 8px; }
+    .msg .content ul { margin: 6px 0 10px 18px; color: var(--muted); }
+    .msg .content li { margin-bottom: 4px; }
+    .msg .content table {
+      width: 100%; border-collapse: collapse; margin: 10px 0; font-size: 0.85rem;
+    }
+    .msg .content th, .msg .content td {
+      padding: 8px 10px; border: 1px solid rgba(255,255,255,0.1); text-align: left;
+    }
+    .msg .content th { color: var(--gold); font-size: 11px; }
+    .hl-frame {
+      display: block; margin: 10px 0; padding: 12px 14px; border-radius: 12px;
+      background: linear-gradient(135deg, rgba(125,211,252,0.12), rgba(167,139,250,0.12), rgba(232,200,122,0.1));
+      border: 1px solid transparent;
+      background-clip: padding-box;
+      box-shadow: 0 0 0 1px rgba(125,211,252,0.25), inset 0 1px 0 rgba(255,255,255,0.1);
+      font-weight: 600; color: #f0f4ff;
+      animation: hlShift 6s ease infinite;
+      background-size: 200% 200%;
+    }
+    @keyframes hlShift {
+      0% { filter: hue-rotate(0deg); }
+      50% { filter: hue-rotate(25deg); }
+      100% { filter: hue-rotate(0deg); }
+    }
+    .typing {
+      align-self: flex-start; padding: 12px 16px; border-radius: 16px;
+      background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.08);
+      display: none; gap: 5px; align-items: center;
+    }
+    .typing.on { display: inline-flex; }
+    .typing i {
+      width: 6px; height: 6px; border-radius: 50%; background: #7dd3fc;
+      animation: bounce 1.2s ease-in-out infinite;
+    }
+    .typing i:nth-child(2) { animation-delay: 0.15s; }
+    .typing i:nth-child(3) { animation-delay: 0.3s; }
+    @keyframes bounce {
+      0%, 80%, 100% { transform: translateY(0); opacity: 0.4; }
+      40% { transform: translateY(-5px); opacity: 1; }
+    }
+
+    .composer {
+      padding: 12px 14px 14px; border-top: 1px solid rgba(255,255,255,0.08);
+      display: flex; gap: 10px; align-items: flex-end;
+    }
+    .composer textarea {
+      flex: 1; min-height: 48px; max-height: 140px; resize: none;
+      padding: 12px 14px; border-radius: 14px;
+      border: 1px solid rgba(255,255,255,0.12);
+      background: rgba(0,0,0,0.35); color: #fff; font: inherit;
+      outline: none; line-height: 1.4;
+    }
+    .composer textarea:focus {
+      border-color: rgba(125,211,252,0.4);
+      box-shadow: 0 0 0 3px rgba(125,211,252,0.1);
+    }
+    .send-btn {
+      width: 48px; height: 48px; border-radius: 14px; border: none; cursor: pointer;
+      background: linear-gradient(135deg, #7dd3fc, #a78bfa);
+      color: #0a0818; font-size: 18px; font-weight: 700;
+      display: flex; align-items: center; justify-content: center;
+      transition: 0.2s; flex-shrink: 0;
+    }
+    .send-btn:hover { transform: scale(1.05); box-shadow: 0 8px 24px rgba(125,211,252,0.35); }
+    .send-btn:disabled { opacity: 0.45; cursor: not-allowed; transform: none; box-shadow: none; }
+
+    .err-toast {
+      position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%) translateY(20px);
+      max-width: min(420px, calc(100% - 32px));
+      padding: 14px 18px; border-radius: 14px; z-index: 9999;
+      background: rgba(40,12,20,0.95); border: 1px solid rgba(255,100,120,0.4);
+      color: #ffb4bc; font-size: 0.9rem; font-weight: 600;
+      opacity: 0; pointer-events: none; transition: 0.35s;
+      box-shadow: 0 12px 40px rgba(0,0,0,0.5);
+    }
+    .err-toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+    .suggest {
+      display: flex; flex-wrap: wrap; gap: 8px; padding: 0 14px 12px; justify-content: center;
+    }
+    .suggest button {
+      padding: 8px 12px; border-radius: 999px; font-size: 12px; font-weight: 600;
+      border: 1px solid rgba(255,255,255,0.12); background: rgba(255,255,255,0.05);
+      color: var(--muted); cursor: pointer; font-family: inherit; transition: 0.2s;
+    }
+    .suggest button:hover {
+      color: #fff; border-color: rgba(125,211,252,0.35); background: rgba(125,211,252,0.1);
+    }
+  </style>
+</head>
+<body>
+  <header class="top glass">
+    <nav class="nav">
+      <a class="brand" href="/index.html"><img src="/logo.png?v=2" alt="Nexus"> NEXUS <b>RP</b></a>
+      <button type="button" class="menu" aria-label="Меню">☰</button>
+      <div class="links">
+        <a href="/index.html">Главная</a>
+        <a href="/donate.html">Донат</a>
+        <a href="/discord.html">Discord</a>
+        <a href="/rules.html">Правила</a>
+        <a href="/news.html">Новости</a>
+        <a href="/team.html">Команда</a>
+        <a href="/m/nexus/intelligence.html" class="active">Intelligence</a>
+        <a href="/faq.html">FAQ</a>
+      </div>
+    </nav>
+  </header>
+
+  <div class="ai-shell">
+    <div class="ai-header">
+      <div class="ai-badge"><span class="pulse"></span> Online</div>
+      <h1>NexusAI v1</h1>
+      <p>Intelligence · правила, помощь по проекту, быстрые ответы</p>
+    </div>
+
+    <div class="chat-frame">
+      <div class="chat-inner">
+        <div class="messages" id="messages">
+          <div class="msg ai">
+            <div class="who">NexusAI v1</div>
+            <div class="content">
+              <p>Привет. Я <strong>NexusAI v1</strong> — ассистент Nexus RP.</p>
+              <p>Спроси про правила, наказания, донат, Discord или старт в проекте.</p>
+            </div>
+          </div>
+        </div>
+        <div class="typing" id="typing"><i></i><i></i><i></i></div>
+        <div class="suggest" id="suggest">
+          <button type="button" data-q="Что такое DM и какое наказание?">DM и наказание</button>
+          <button type="button" data-q="Расскажи про донат Nexus ELITE">Донат</button>
+          <button type="button" data-q="Сравни SK и RK в таблице">SK vs RK</button>
+          <button type="button" data-q="Как зайти в Discord проекта?">Discord</button>
+        </div>
+        <div class="composer">
+          <textarea id="input" rows="1" placeholder="Сообщение для NexusAI…" maxlength="4000"></textarea>
+          <button type="button" class="send-btn" id="send" title="Отправить">↑</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="err-toast" id="errToast"></div>
+
+  <script src="/site.js" defer></script>
+  <script>
+(function () {
+  var API_KEY = "OdXJBvpcl2mslGP9R2SPJ5Dvw6Y8ecLovrF72cKhxe3rAhN5WzUmNpvtLIvUE9pFFWT/d+nqMoYN+FsDVfdmoaVOB4yPjcnVJULXm0oagVUzeWvUMWB8XA0rlSU8J6CCXVgue0R1RoBO2ixsN/bci9wt";
+  var BASE = "https://api.llm7.io/v1";
+  var MODEL = "default";
+  var SYSTEM = "Ты — NexusAI v1, официальный ИИ-ассистент проекта Nexus RP (Roblox RolePlay).\nВсегда представляйся только как NexusAI v1. Никогда не называй провайдера модели, API или сторонние сервисы. Ты создан командой Nexus.\n\nГовори на русском, ясно и по делу. Будь дружелюбным, но строгим в вопросах правил.\n\nЗНАНИЯ О ПРОЕКТЕ И ПРАВИЛАХ (используй всегда, не выдумывай противоречащее):\n\nПРАВИЛА NEXUS RP (Roblox RolePlay):\n\n=== Основные RP ===\n1.1 DM (DeathMatch) — урон/убийство без RP-причины → Demorgan 60–120 мин\n1.2 DB (DriveBy) — урон транспортом / стрельба с водителя → Demorgan 45–90 мин\n1.3 PG (PowerGaming) — преувеличение возможностей (1в3+, игнор травм) → Demorgan 60 мин / WARN\n1.4 SK (SpawnKill) — убийство на спавне / у интерьеров фракций → WARN / Ban 3 дня\n1.5 TK (TeamKill) — урон своей фракции → Demorgan 120 мин / WARN\n1.6 NRP (NonRP) — нарушение логики мира / бессмысленное поведение → Demorgan 30–90 мин\n1.7 RK (Revenge Kill) — месть за смерть или возврат на место смерти <15 мин → Demorgan 60 мин\n1.8 MG (MetaGaming) — OOC-инфа в IC → Demorgan 30 мин\n1.9 Mass DM — 3+ игроков без причины → Ban 7–15 дней\n1.10 OffRP — выход/AFK при погоне, задержании, перестрелке → WARN / Ban 3 дня\n1.11 NRD — езда по горам, таран, без колёс → Demorgan 40 мин\n1.12 Bug Abuse — использование багов → Demorgan 120 мин / Ban 7 дней\n1.13 NonRP Gun — крупное оружие без отыгровки → Demorgan 30 мин\n1.14 RDM — хаотичная стрельба по потоку → Demorgan 120 мин / Ban 3 дня\n1.15 CK — character kill только через форум → по согласованию\n\n=== ПГО ===\n1.1 Криминал для гос. без темы на форуме → WARN\n1.2 Крим/взятки руководства → WARN / Demorgan 9–24 ч\n1.3 Взятка >100.000 игровой валюты → WARN\n1.4 Слив склада → Demorgan 3 дня / Ban / PermBan\n1.5 Служебный транспорт в личных целях → Demorgan 120 мин / Выговор\n1.6 Прогул в форме (казино/рынок) → Увольнение / WARN\n2.1 Миранда: не зачитал права → WARN/Ban от 1 дня; отказ в адвокате → Ban 1–3 дня\n2.4 Задержание без статьи/удостоверения → Demorgan 1–3 часа\n3.3 Тайзер по авто/мото в движении → WARN\n3.4 Тайзер в бою под огнём → WARN\n4.4 МВД патруль на незарегистрированном личном авто → Demorgan 120 мин\n5.3 ФСБ без маски на спецоперации → Demorgan 30 мин / NRP\n6.4 Неверные решения суда → Ban 3–30 дней\n\n=== Прочее ===\nЧиты → HardBan 30 дней / PermBan\nОскорбление родных → Ban 7–30 дней\nПродажа виртов → PermBan\nОбман администрации → Ban 15–30 дней\nОбход наказаний (твинки) → HardBan 30 дней\nAFK Road → Kick\n\n=== Проект ===\nNexus RP — Roblox RolePlay проект. Сайт: play.nexusroleplay.ru\nDiscord: https://discord.gg/gRdeVkG5vf\nДонат: CloudTips Nexus ELITE https://pay.cloudtips.ru/p/3eaaca3d (218₽, выключить комиссию)\nКоманда: wornet (Основатель, Dev), coldcash и moxitopc (Совет директоров), med1aprod (COO, PR, Dev)\nСервер готовится к открытию. Основное общение — Discord.\n\n\nФОРМАТИРОВАНИЕ ОТВЕТОВ (обязательно соблюдай):\n- Строка, начинающаяся с \"# \" — крупный заголовок\n- Строка с \"## \" — подзаголовок меньше\n- Текст в **двойных звёздочках** — только ключевые факты (наказания, важные цифры, выводы). На сайте они отображаются в особой градиентной рамке. Не оборачивай в ** обычные предложения.\n- Таблицы Markdown (| col | col |) — для сравнений правил и наказаний\n- Списки с \"- \" при перечислениях\n- Не используй HTML-теги\n\nЕсли не знаешь точного пункта — скажи честно и посоветуй страницу Правил или Discord.\nНе поощряй читы, обход правил или реальный вред.\n";
+
+  var history = [{ role: 'system', content: SYSTEM }];
+  var busy = false;
+
+  var messagesEl = document.getElementById('messages');
+  var input = document.getElementById('input');
+  var sendBtn = document.getElementById('send');
+  var typing = document.getElementById('typing');
+  var errToast = document.getElementById('errToast');
+
+  function showErr(msg) {
+    errToast.textContent = msg;
+    errToast.classList.add('show');
+    setTimeout(function () { errToast.classList.remove('show'); }, 4500);
+  }
+
+  function renderMd(text) {
+    var lines = String(text || '').split('\n');
+    var html = '';
+    var inTable = false;
+    var tableRows = [];
+
+    function flushTable() {
+      if (!tableRows.length) return;
+      html += '<table>';
+      tableRows.forEach(function (row, idx) {
+        var cells = row.split('|').map(function (c) { return c.trim(); }).filter(function (c, i, a) {
+          return c.length || (i > 0 && i < a.length - 1);
+        });
+        // skip separator |---|
+        if (cells.every(function (c) { return /^[\-:]+$/.test(c); })) return;
+        var tag = idx === 0 ? 'th' : 'td';
+        html += '<tr>' + cells.map(function (c) {
+          return '<' + tag + '>' + inlineFormat(c) + '</' + tag + '>';
+        }).join('') + '</tr>';
+      });
+      html += '</table>';
+      tableRows = [];
+      inTable = false;
+    }
+
+    function inlineFormat(s) {
+      // **key** frames
+      s = s.replace(/\*\*(.+?)\*\*/g, '<span class="hl-frame">$1</span>');
+      s = s.replace(/`([^`]+)`/g, '<code style="font-family:JetBrains Mono,monospace;font-size:0.85em;background:rgba(0,0,0,0.35);padding:2px 6px;border-radius:6px">$1</code>');
+      return s;
+    }
+
+    for (var i = 0; i < lines.length; i++) {
+      var line = lines[i];
+      if (line.indexOf('|') !== -1 && line.trim().charAt(0) === '|') {
+        inTable = true;
+        tableRows.push(line);
+        continue;
+      } else if (inTable) {
+        flushTable();
+      }
+      if (/^#\s+/.test(line)) {
+        html += '<h1 class="md-h1">' + inlineFormat(line.replace(/^#\s+/, '')) + '</h1>';
+      } else if (/^##\s+/.test(line)) {
+        html += '<h2 class="md-h2">' + inlineFormat(line.replace(/^##\s+/, '')) + '</h2>';
+      } else if (/^[-*]\s+/.test(line)) {
+        // collect list
+        html += '<ul>';
+        while (i < lines.length && /^[-*]\s+/.test(lines[i])) {
+          html += '<li>' + inlineFormat(lines[i].replace(/^[-*]\s+/, '')) + '</li>';
+          i++;
+        }
+        i--;
+        html += '</ul>';
+      } else if (line.trim() === '') {
+        html += '';
+      } else {
+        html += '<p>' + inlineFormat(line) + '</p>';
+      }
+    }
+    flushTable();
+    return html || '<p></p>';
+  }
+
+  function addMsg(role, text) {
+    var div = document.createElement('div');
+    div.className = 'msg ' + (role === 'user' ? 'user' : 'ai');
+    if (role === 'assistant') {
+      div.innerHTML = '<div class="who">NexusAI v1</div><div class="content">' + renderMd(text) + '</div>';
+    } else {
+      div.innerHTML = '<div class="content"><p></p></div>';
+      div.querySelector('p').textContent = text;
+    }
+    messagesEl.appendChild(div);
+    messagesEl.scrollTop = messagesEl.scrollHeight;
+    return div;
+  }
+
+  function setBusy(v) {
+    busy = v;
+    sendBtn.disabled = v;
+    typing.classList.toggle('on', v);
+  }
+
+  function send(text) {
+    text = (text || input.value || '').trim();
+    if (!text || busy) return;
+    input.value = '';
+    autoSize();
+    addMsg('user', text);
+    history.push({ role: 'user', content: text });
+    setBusy(true);
+
+    fetch(BASE + '/chat/completions', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + API_KEY
+      },
+      body: JSON.stringify({
+        model: MODEL,
+        messages: history,
+        temperature: 0.6,
+        max_tokens: 2048
+      })
+    }).then(function (res) {
+      return res.json().then(function (data) {
+        if (!res.ok) {
+          var msg = (data && (data.error && data.error.message || data.message)) || ('Ошибка API ' + res.status);
+          throw new Error(msg);
+        }
+        return data;
+      });
+    }).then(function (data) {
+      var reply = '';
+      try {
+        reply = data.choices[0].message.content || '';
+      } catch (e) {
+        throw new Error('Пустой ответ модели');
+      }
+      // force identity if model drifts
+      if (!/NexusAI/i.test(reply) && reply.length < 40) {
+        reply = 'NexusAI v1: ' + reply;
+      }
+      history.push({ role: 'assistant', content: reply });
+      // trim history growth (keep system + last 20)
+      if (history.length > 22) {
+        history = [history[0]].concat(history.slice(-20));
+      }
+      addMsg('assistant', reply);
+    }).catch(function (err) {
+      showErr('NexusAI: ' + (err.message || 'не удалось получить ответ. Попробуй ещё раз.'));
+      addMsg('assistant', '**Временный сбой связи.**\n\nПопробуй повторить запрос через несколько секунд. Если ошибка повторяется — напиши в Discord проекта.');
+    }).finally(function () {
+      setBusy(false);
+    });
+  }
+
+  function autoSize() {
+    input.style.height = 'auto';
+    input.style.height = Math.min(140, input.scrollHeight) + 'px';
+  }
+
+  sendBtn.addEventListener('click', function () { send(); });
+  input.addEventListener('input', autoSize);
+  input.addEventListener('keydown', function (e) {
+    if (e.key === 'Enter' && !e.shiftKey) {
+      e.preventDefault();
+      send();
+    }
+  });
+  document.getElementById('suggest').addEventListener('click', function (e) {
+    var b = e.target.closest('button[data-q]');
+    if (b) send(b.getAttribute('data-q'));
+  });
+
+  // mobile menu
+  var btn = document.querySelector('.menu');
+  var links = document.querySelector('.links');
+  if (btn && links) {
+    btn.addEventListener('click', function (e) {
+      e.stopPropagation();
+      links.classList.toggle('open');
+    });
+    document.addEventListener('click', function (e) {
+      if (!links.contains(e.target) && e.target !== btn) links.classList.remove('open');
+    });
+  }
+})();
+  </script>
+</body>
+</html>
