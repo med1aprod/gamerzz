@@ -1,0 +1,49 @@
+#aurora-canvas,
+#stars-canvas,
+#trail-canvas {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+#aurora-canvas { z-index: -3; }
+#stars-canvas { z-index: -2; }
+#trail-canvas { z-index: 9990; }
+
+#custom-cursor {
+  position: fixed;
+  top: 0; left: 0;
+  width: 34px;
+  height: 34px;
+  pointer-events: none;
+  z-index: 9991;
+  transform: translate(-50%, -50%);
+  will-change: transform, filter;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+#custom-cursor.is-visible { opacity: 1; }
+#custom-cursor img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: contain;
+}
+
+body.custom-cursor-on,
+body.custom-cursor-on * {
+  cursor: none !important;
+}
+
+.bg-3d {
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
+body::before {
+  opacity: 0.02 !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #aurora-canvas, #stars-canvas { opacity: 0.6; }
+}

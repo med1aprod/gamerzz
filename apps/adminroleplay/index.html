@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex,nofollow">
+  <title>Admin — Nexus RP</title>
+  <link rel="icon" href="/favicon.png" type="image/png">
+  <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@600;700;800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #07060f; --panel: rgba(255,255,255,0.06); --text: #f4f0ff; --muted: #9b93b0;
+      --gold: #e8c87a; --gold2: #f5d98a; --ok: #37FFD0; --bad: #ff6b7a; --line: rgba(255,255,255,0.1);
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      min-height: 100vh; background: radial-gradient(ellipse 80% 50% at 50% -10%, #1a1040 0%, var(--bg) 55%);
+      color: var(--text); font-family: Manrope, system-ui, sans-serif; line-height: 1.5;
+    }
+    .wrap { width: min(920px, calc(100% - 28px)); margin: 0 auto; padding: 28px 0 60px; }
+    h1 { font-family: Unbounded, sans-serif; font-size: 1.35rem; font-weight: 800; }
+    h2 { font-family: Unbounded, sans-serif; font-size: 0.95rem; font-weight: 700; margin-bottom: 12px; color: var(--gold2); }
+    .muted { color: var(--muted); font-size: 0.9rem; }
+    .card {
+      background: linear-gradient(165deg, rgba(255,255,255,0.09), rgba(255,255,255,0.03));
+      border: 1px solid var(--line); border-radius: 18px; padding: 20px 18px; margin-bottom: 16px;
+      backdrop-filter: blur(20px);
+    }
+    label { display: block; font-size: 12px; font-weight: 600; color: var(--muted); margin-bottom: 6px; letter-spacing: 0.04em; }
+    input, textarea, select {
+      width: 100%; padding: 11px 13px; border-radius: 12px; border: 1px solid var(--line);
+      background: rgba(0,0,0,0.35); color: var(--text); font: inherit; outline: none; margin-bottom: 12px;
+    }
+    input:focus, textarea:focus, select:focus { border-color: rgba(232,200,122,0.45); }
+    textarea { min-height: 90px; resize: vertical; }
+    .row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    @media (max-width: 640px) { .row { grid-template-columns: 1fr; } }
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+      padding: 11px 18px; border-radius: 12px; border: none; cursor: pointer; font: inherit; font-weight: 700;
+      transition: 0.2s;
+    }
+    .btn-gold { background: linear-gradient(135deg, #f5d98a, #c9a227); color: #1a1205; }
+    .btn-gold:hover { transform: translateY(-1px); box-shadow: 0 8px 24px rgba(232,200,122,0.35); }
+    .btn-ghost { background: rgba(255,255,255,0.06); color: var(--text); border: 1px solid var(--line); }
+    .btn-ghost:hover { background: rgba(255,255,255,0.1); }
+    .btn-danger { background: rgba(255,80,100,0.15); color: #ff8a9a; border: 1px solid rgba(255,80,100,0.3); }
+    .btn-row { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 8px; }
+    .status-pill {
+      display: inline-flex; align-items: center; gap: 8px; padding: 6px 12px; border-radius: 999px;
+      font-size: 12px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase;
+    }
+    .st-off { background: rgba(55,255,208,0.12); color: var(--ok); }
+    .st-soft { background: rgba(232,200,122,0.15); color: var(--gold2); }
+    .st-hard { background: rgba(255,80,100,0.15); color: var(--bad); }
+    .hint {
+      font-size: 0.82rem; color: var(--muted); padding: 10px 12px; border-radius: 12px;
+      background: rgba(255,255,255,0.04); border: 1px solid var(--line); margin-top: 10px; line-height: 1.45;
+    }
+    .login-wrap {
+      min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 20px;
+    }
+    .login-box { width: min(380px, 100%); text-align: center; }
+    .login-box img { width: 56px; height: 56px; margin-bottom: 16px; filter: drop-shadow(0 0 12px rgba(232,200,122,0.45)); }
+    .hidden { display: none !important; }
+    .news-item {
+      display: flex; flex-wrap: wrap; gap: 10px; align-items: flex-start; justify-content: space-between;
+      padding: 12px 0; border-bottom: 1px solid var(--line);
+    }
+    .news-item:last-child { border-bottom: none; }
+    .tag {
+      font-size: 10px; font-weight: 700; padding: 2px 7px; border-radius: 6px;
+      background: rgba(232,200,122,0.12); color: var(--gold2); border: 1px solid rgba(232,200,122,0.25);
+    }
+    .toast {
+      position: fixed; bottom: 20px; right: 20px; padding: 12px 16px; border-radius: 12px;
+      background: rgba(20,18,35,0.95); border: 1px solid rgba(232,200,122,0.3); color: #fff;
+      font-size: 13px; font-weight: 600; opacity: 0; transform: translateY(8px); transition: 0.3s; z-index: 99;
+    }
+    .toast.show { opacity: 1; transform: none; }
+    .topbar { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 22px; flex-wrap: wrap; }
+  </style>
+</head>
+<body>
+  <div id="loginView" class="login-wrap">
+    <div class="login-box card">
+      <img src="/logo.png" alt="Nexus" onerror="this.src='../../logo.png'">
+      <h1 style="margin-bottom:6px">Nexus Admin</h1>
+      <p class="muted" style="margin-bottom:18px">Панель управления сайтом RolePlay</p>
+      <label for="password">Пароль</label>
+      <input type="password" id="password" placeholder="••••••••" autocomplete="current-password">
+      <button type="button" class="btn btn-gold" id="loginBtn" style="width:100%">Войти</button>
+      <p class="hint">Пароль задан в Google Apps Script → Script properties → ADMIN_PASSWORD. В коде сайта его нет.</p>
+    </div>
+  </div>
+
+  <div id="appView" class="wrap hidden">
+    <div class="topbar">
+      <div>
+        <h1>Админ-панель</h1>
+        <p class="muted">Nexus RP · play.nexusroleplay.ru</p>
+      </div>
+      <div class="btn-row">
+        <span id="maintPill" class="status-pill st-off">off</span>
+        <button type="button" class="btn btn-ghost" id="refreshBtn">Обновить</button>
+        <button type="button" class="btn btn-ghost" id="logoutBtn">Выйти</button>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>Технические работы</h2>
+      <p class="muted" style="margin-bottom:12px">Режим для всего публичного сайта (читает Google Sheet).</p>
+      <div class="btn-row" style="margin-bottom:14px">
+        <button type="button" class="btn btn-ghost" data-mode="off">OFF — всё работает</button>
+        <button type="button" class="btn btn-ghost" data-mode="soft">SOFT — баннер</button>
+        <button type="button" class="btn btn-ghost" data-mode="hard">HARD — заглушка</button>
+      </div>
+      <label>Текст soft-баннера</label>
+      <input type="text" id="softText" placeholder="Технические работы...">
+      <div class="row">
+        <div>
+          <label>Заголовок hard</label>
+          <input type="text" id="hardTitle" placeholder="Технические работы">
+        </div>
+        <div>
+          <label>Текст hard</label>
+          <input type="text" id="hardText" placeholder="Сайт временно недоступен">
+        </div>
+      </div>
+      <button type="button" class="btn btn-gold" id="saveMaint">Сохранить тексты + текущий режим</button>
+      <p class="hint"><b>OFF</b> — обычный сайт.<br><b>SOFT</b> — сверху полоска, страницы доступны.<br><b>HARD</b> — посетителям только заглушка; эта админка всегда доступна по прямой ссылке.</p>
+    </div>
+
+    <div class="card">
+      <h2>Новая новость</h2>
+      <div class="row">
+        <div>
+          <label>Дата</label>
+          <input type="text" id="nDate" placeholder="15 ноября 2026">
+        </div>
+        <div>
+          <label>Статус (плашка)</label>
+          <select id="nStatus">
+            <option value="В работе">В работе</option>
+            <option value="Скоро">Скоро</option>
+            <option value="Готово">Готово</option>
+            <option value="Важно">Важно</option>
+            <option value="">— без статуса —</option>
+          </select>
+        </div>
+      </div>
+      <div class="row">
+        <div>
+          <label>Категория (бейдж)</label>
+          <select id="nCat">
+            <option value="РАЗРАБОТКА">РАЗРАБОТКА</option>
+            <option value="САЙТ">САЙТ</option>
+            <option value="СООБЩЕСТВО">СООБЩЕСТВО</option>
+            <option value="АНОНС">АНОНС</option>
+            <option value="ПРАВИЛА">ПРАВИЛА</option>
+          </select>
+        </div>
+        <div>
+          <label>Опубликовать сразу</label>
+          <select id="nPub">
+            <option value="yes">Да</option>
+            <option value="no">Нет (черновик)</option>
+          </select>
+        </div>
+      </div>
+      <label>Заголовок</label>
+      <input type="text" id="nTitle" placeholder="Заголовок новости">
+      <label>Текст</label>
+      <textarea id="nBody" placeholder="Текст новости…"></textarea>
+      <button type="button" class="btn btn-gold" id="addNews">Опубликовать новость</button>
+      <p class="hint">На сайте показываются только новости с published = yes. Статус + категория как на макете (например «В работе» + «РАЗРАБОТКА»).</p>
+    </div>
+
+    <div class="card">
+      <h2>Все новости</h2>
+      <div id="newsAdminList" class="muted">Загрузка…</div>
+    </div>
+
+    <div class="card">
+      <h2>Discord</h2>
+      <label>Invite-ссылка</label>
+      <input type="url" id="discordInvite" placeholder="https://discord.gg/...">
+      <label>Guild ID (для виджета онлайна, опционально)</label>
+      <input type="text" id="discordGuild" placeholder="1234567890">
+      <button type="button" class="btn btn-gold" id="saveDiscord">Сохранить Discord</button>
+    </div>
+  </div>
+
+  <div class="toast" id="toast"></div>
+
+  <script src="/config.js" onerror="this.remove()"></script>
+  <script src="../../config.js" onerror="this.remove()"></script>
+  <script>
+    window.NEXUS_CONFIG = window.NEXUS_CONFIG || {
+      apiUrl: "https://script.google.com/macros/s/AKfycbzdeoLqQk0tN4NJGU7rt2K-l4B_BenJitbyZ8y1xc2iAS-ILC92PXNq5M_huApNUU21DA/exec"
+    };
+  </script>
+  <script>
+  (function () {
+    var API = (window.NEXUS_CONFIG && window.NEXUS_CONFIG.apiUrl) || '';
+    // fallback relative config for folder depth
+    if (!API) {
+      // try parent config load already done
+    }
+    var pass = sessionStorage.getItem('nexus_admin_pass') || '';
+    var currentMode = 'off';
+
+    function toast(msg) {
+      var t = document.getElementById('toast');
+      t.textContent = msg;
+      t.classList.add('show');
+      setTimeout(function () { t.classList.remove('show'); }, 2800);
+    }
+
+    function api(body) {
+      body.password = pass;
+      return fetch(API, {
+        method: 'POST',
+        headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+        body: JSON.stringify(body)
+      }).then(function (r) { return r.json(); });
+    }
+
+    function setPill(mode) {
+      currentMode = mode || 'off';
+      var p = document.getElementById('maintPill');
+      p.className = 'status-pill st-' + (currentMode === 'soft' ? 'soft' : currentMode === 'hard' ? 'hard' : 'off');
+      p.textContent = currentMode;
+    }
+
+    function showApp() {
+      document.getElementById('loginView').classList.add('hidden');
+      document.getElementById('appView').classList.remove('hidden');
+      loadAdmin();
+    }
+
+    function loadAdmin() {
+      api({ action: 'get_admin' }).then(function (d) {
+        if (!d || !d.ok) { toast('Ошибка загрузки'); return; }
+        var s = d.settings || {};
+        setPill(s.maintenance || 'off');
+        document.getElementById('softText').value = s.soft_text || '';
+        document.getElementById('hardTitle').value = s.hard_title || '';
+        document.getElementById('hardText').value = s.hard_text || '';
+        document.getElementById('discordInvite').value = s.discord_invite || '';
+        document.getElementById('discordGuild').value = s.discord_guild_id || '';
+        renderNews(d.news || []);
+      }).catch(function () { toast('Сеть / API ошибка'); });
+    }
+
+    function renderNews(list) {
+      var box = document.getElementById('newsAdminList');
+      if (!list.length) { box.innerHTML = 'Пока нет новостей.'; return; }
+      box.innerHTML = list.map(function (n) {
+        return (
+          '<div class="news-item" data-id="' + n.id + '">' +
+          '<div><strong>' + esc(n.title) + '</strong><br><span class="muted">' + esc(n.date) +
+          (n.status ? ' · ' + esc(n.status) : '') +
+          (n.category ? ' <span class="tag">' + esc(n.category) + '</span>' : '') +
+          (n.published ? ' · <span style="color:#37FFD0">опубликовано</span>' : ' · черновик') +
+          '</span></div>' +
+          '<div class="btn-row">' +
+          '<button type="button" class="btn btn-ghost btn-sm" data-act="toggle">' + (n.published ? 'Скрыть' : 'Показать') + '</button>' +
+          '<button type="button" class="btn btn-danger btn-sm" data-act="del">Удалить</button>' +
+          '</div></div>'
+        );
+      }).join('');
+    }
+
+    function esc(s) {
+      return String(s || '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+    }
+
+    document.getElementById('loginBtn').addEventListener('click', doLogin);
+    document.getElementById('password').addEventListener('keydown', function (e) {
+      if (e.key === 'Enter') doLogin();
+    });
+
+    function doLogin() {
+      pass = document.getElementById('password').value;
+      if (!pass) { toast('Введите пароль'); return; }
+      if (!API) { toast('config.js: нет apiUrl'); return; }
+      api({ action: 'login' }).then(function (d) {
+        if (d && d.ok) {
+          sessionStorage.setItem('nexus_admin_pass', pass);
+          showApp();
+          toast('Вход выполнен');
+        } else {
+          pass = '';
+          toast('Неверный пароль');
+        }
+      }).catch(function () { toast('Ошибка API'); });
+    }
+
+    document.getElementById('logoutBtn').addEventListener('click', function () {
+      sessionStorage.removeItem('nexus_admin_pass');
+      pass = '';
+      location.reload();
+    });
+    document.getElementById('refreshBtn').addEventListener('click', loadAdmin);
+
+    document.querySelectorAll('[data-mode]').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var mode = btn.getAttribute('data-mode');
+        api({
+          action: 'set_maintenance',
+          mode: mode,
+          soft_text: document.getElementById('softText').value,
+          hard_title: document.getElementById('hardTitle').value,
+          hard_text: document.getElementById('hardText').value
+        }).then(function (d) {
+          if (d && d.ok) { setPill(mode); toast('Режим: ' + mode); }
+          else toast('Ошибка');
+        });
+      });
+    });
+
+    document.getElementById('saveMaint').addEventListener('click', function () {
+      api({
+        action: 'set_maintenance',
+        mode: currentMode,
+        soft_text: document.getElementById('softText').value,
+        hard_title: document.getElementById('hardTitle').value,
+        hard_text: document.getElementById('hardText').value
+      }).then(function (d) { toast(d && d.ok ? 'Сохранено' : 'Ошибка'); });
+    });
+
+    document.getElementById('addNews').addEventListener('click', function () {
+      var title = document.getElementById('nTitle').value.trim();
+      if (!title) { toast('Нужен заголовок'); return; }
+      api({
+        action: 'add_news',
+        date: document.getElementById('nDate').value,
+        title: title,
+        body: document.getElementById('nBody').value,
+        status: document.getElementById('nStatus').value,
+        category: document.getElementById('nCat').value,
+        published: document.getElementById('nPub').value === 'yes'
+      }).then(function (d) {
+        if (d && d.ok) {
+          toast('Новость #' + d.id);
+          document.getElementById('nTitle').value = '';
+          document.getElementById('nBody').value = '';
+          loadAdmin();
+        } else toast('Ошибка');
+      });
+    });
+
+    document.getElementById('newsAdminList').addEventListener('click', function (e) {
+      var btn = e.target.closest('button[data-act]');
+      if (!btn) return;
+      var item = btn.closest('.news-item');
+      var id = item.getAttribute('data-id');
+      if (btn.getAttribute('data-act') === 'del') {
+        if (!confirm('Удалить новость?')) return;
+        api({ action: 'delete_news', id: id }).then(function () { loadAdmin(); toast('Удалено'); });
+      } else {
+        var hide = btn.textContent.indexOf('Скрыть') !== -1;
+        api({ action: 'set_published', id: id, published: !hide }).then(function () { loadAdmin(); });
+      }
+    });
+
+    document.getElementById('saveDiscord').addEventListener('click', function () {
+      api({
+        action: 'set_discord',
+        discord_invite: document.getElementById('discordInvite').value,
+        discord_guild_id: document.getElementById('discordGuild').value
+      }).then(function (d) { toast(d && d.ok ? 'Discord сохранён' : 'Ошибка'); });
+    });
+
+    // auto session
+    if (pass) {
+      api({ action: 'login' }).then(function (d) {
+        if (d && d.ok) showApp();
+        else sessionStorage.removeItem('nexus_admin_pass');
+      });
+    }
+  })();
+  </script>
+</body>
+</html>
