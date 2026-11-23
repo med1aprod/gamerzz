@@ -7,10 +7,13 @@
   }
 </script>
 <meta charset="utf-8">
+<link rel="icon" href="/favicon.png" type="image/png" sizes="32x32">
+<link rel="icon" href="/favicon-120.png" type="image/png" sizes="120x120">
+<link rel="icon" href="/favicon-144.png" type="image/png" sizes="144x144">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, maximum-scale=1">
 <meta name="theme-color" content="#05040a">
 <title>n.ai — Nexus Intelligence</title>
-<link rel="icon" href="/favicon.png" type="image/png">
 <link rel="stylesheet" href="/aurora.css">
 <link rel="stylesheet" href="/site-extras.css">
 <script src="/config.js"></script>
@@ -21,33 +24,24 @@
 body{display:flex;flex-direction:column;min-height:100dvh;overflow:hidden}a{color:inherit;text-decoration:none}
 .glass{background:linear-gradient(165deg,rgba(255,255,255,.1),rgba(255,255,255,.03));backdrop-filter:blur(48px) saturate(180%);border:1px solid rgba(255,255,255,.16);box-shadow:0 10px 40px rgba(0,0,0,.35),inset 0 1px 0 rgba(255,255,255,.2)}
 .top{position:fixed;top:10px;left:50%;transform:translateX(-50%);z-index:50;width:min(1100px,calc(100% - 20px));padding:7px 12px;border-radius:16px}
-.nav{display:flex;align-items:center;gap:8px}
-.brand{display:flex;align-items:center;gap:8px;font-family:Unbounded,sans-serif;font-weight:700;font-size:13px}
-.brand img{width:28px;height:28px;object-fit:contain;filter:drop-shadow(0 0 8px rgba(232,200,122,.5))}
-.brand b{color:var(--gold)}.links{display:flex;gap:1px;margin-left:auto;flex-wrap:wrap}
-.links a{font-size:12px;font-weight:600;color:var(--muted);padding:7px 10px;border-radius:10px}
-.links a:hover{color:#fff;background:rgba(255,255,255,.07)}
-.links a.active{color:#fff;background:rgba(125,211,252,.12);box-shadow:inset 0 0 0 1px rgba(125,211,252,.25)}
+.nav{display:flex;align-items:center;gap:8px}.brand{display:flex;align-items:center;gap:8px;font-family:Unbounded,sans-serif;font-weight:700;font-size:13px}
+.brand img{width:28px;height:28px;object-fit:contain;filter:drop-shadow(0 0 8px rgba(232,200,122,.5))}.brand b{color:var(--gold)}
+.links{display:flex;gap:1px;margin-left:auto;flex-wrap:wrap}.links a{font-size:12px;font-weight:600;color:var(--muted);padding:7px 10px;border-radius:10px}
+.links a:hover{color:#fff;background:rgba(255,255,255,.07)}.links a.active{color:#fff;background:rgba(125,211,252,.12);box-shadow:inset 0 0 0 1px rgba(125,211,252,.25)}
 .menu{display:none;width:40px;height:40px;border-radius:11px;border:1px solid var(--line);background:rgba(255,255,255,.06);color:#fff;cursor:pointer;margin-left:auto}
 @media(max-width:980px){.menu{display:flex}.links{display:none;position:fixed;top:64px;left:10px;right:10px;flex-direction:column;padding:12px;border-radius:16px;background:rgba(8,6,18,.97)!important;border:1px solid var(--line);z-index:60}.links.open{display:flex!important}.links a{padding:12px 14px;font-size:14px}}
 .stage{flex:1;display:flex;flex-direction:column;width:min(980px,100%);margin:0 auto;padding:72px 12px 0;min-height:0;height:100dvh}
-.head{display:flex;align-items:center;justify-content:space-between;padding:8px 6px 14px}
-.head-left{display:flex;align-items:center;gap:12px}
+.head{display:flex;align-items:center;justify-content:space-between;padding:8px 6px 14px}.head-left{display:flex;align-items:center;gap:12px}
 .avatar{width:44px;height:44px;border-radius:14px;background:linear-gradient(135deg,#7dd3fc,#a78bfa 55%,#f5d98a);display:grid;place-items:center;font-family:Unbounded,sans-serif;font-weight:800;font-size:13px;color:#0b0a12;box-shadow:0 0 24px rgba(125,211,252,.35)}
-.head h1{font-family:Unbounded,sans-serif;font-size:1.05rem;font-weight:700}
-.head h1 span{background:linear-gradient(90deg,#fff,#7dd3fc,#c4b5fd);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
-.head p{font-size:12px;color:var(--muted)}
+.head h1{font-family:Unbounded,sans-serif;font-size:1.05rem;font-weight:700}.head h1 span{background:linear-gradient(90deg,#fff,#7dd3fc,#c4b5fd);-webkit-background-clip:text;-webkit-text-fill-color:transparent}.head p{font-size:12px;color:var(--muted)}
 .live{font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#37FFD0;display:inline-flex;align-items:center;gap:6px}
-.live i{width:7px;height:7px;border-radius:50%;background:#37FFD0;box-shadow:0 0 10px #37FFD0;animation:p 1.5s ease-in-out infinite}
-@keyframes p{50%{opacity:.35}}
+.live i{width:7px;height:7px;border-radius:50%;background:#37FFD0;box-shadow:0 0 10px #37FFD0;animation:p 1.5s ease-in-out infinite}@keyframes p{50%{opacity:.35}}
 .panel{position:relative;flex:1;min-height:0;display:flex;flex-direction:column;border-radius:22px;overflow:hidden}
 .panel::before{content:"";position:absolute;inset:0;border-radius:22px;padding:1.5px;pointer-events:none;z-index:3;background:conic-gradient(from var(--a,0deg),transparent 0 35%,#7dd3fc,#a78bfa,#f5d98a,transparent 65% 100%);-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;animation:spin 5s linear infinite}
-@property --a{syntax:'<angle>';inherits:false;initial-value:0deg}
-@keyframes spin{to{--a:360deg}}
+@property --a{syntax:'<angle>';inherits:false;initial-value:0deg}@keyframes spin{to{--a:360deg}}
 .panel-bg{position:absolute;inset:1px;border-radius:21px;z-index:0;background:linear-gradient(180deg,rgba(16,14,28,.94),rgba(6,5,14,.98));backdrop-filter:blur(40px)}
 .scroll{position:relative;z-index:1;flex:1;min-height:0;overflow-y:auto;padding:22px 18px 12px;display:flex;flex-direction:column;gap:16px}
-.msg{max-width:min(100%,720px);animation:in .4s cubic-bezier(.22,1,.36,1)}
-@keyframes in{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+.msg{max-width:min(100%,720px);animation:in .4s cubic-bezier(.22,1,.36,1)}@keyframes in{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
 .msg.user{align-self:flex-end}.msg.ai{align-self:flex-start;width:min(100%,720px)}
 .bubble{padding:14px 16px;border-radius:18px;font-size:15px;line-height:1.6}
 .msg.user .bubble{background:linear-gradient(135deg,rgba(232,200,122,.22),rgba(120,60,200,.18));border:1px solid rgba(232,200,122,.3);border-bottom-right-radius:6px}
@@ -62,10 +56,8 @@ body{display:flex;flex-direction:column;min-height:100dvh;overflow:hidden}a{colo
 .foot{z-index:2;flex-shrink:0;padding:10px 12px 14px;border-top:1px solid rgba(255,255,255,.07);background:rgba(5,4,12,.55)}
 .chips{display:flex;gap:8px;overflow-x:auto;padding-bottom:10px}.chips button{flex-shrink:0;padding:8px 13px;border-radius:999px;border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.05);color:var(--muted);font:600 12px Manrope,sans-serif;cursor:pointer}
 .composer{display:flex;gap:10px;align-items:flex-end}.composer textarea{flex:1;min-height:52px;max-height:160px;resize:none;padding:14px 16px;border-radius:16px;border:1px solid rgba(255,255,255,.14);background:rgba(0,0,0,.4);color:#fff;font:500 15px Manrope,sans-serif;outline:none}
-.send{width:52px;height:52px;border:none;border-radius:16px;cursor:pointer;background:linear-gradient(135deg,#7dd3fc,#a78bfa 60%,#e8c87a);color:#0a0814;font-size:20px;font-weight:800}
-.send:disabled{opacity:.4;cursor:not-allowed}
-.toast{position:fixed;bottom:18px;left:50%;transform:translateX(-50%) translateY(16px);padding:13px 16px;border-radius:14px;z-index:100;background:rgba(36,10,18,.96);border:1px solid rgba(255,110,130,.45);color:#ffc0c8;font-size:13.5px;font-weight:600;opacity:0;transition:.35s}
-.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+.send{width:52px;height:52px;border:none;border-radius:16px;cursor:pointer;background:linear-gradient(135deg,#7dd3fc,#a78bfa 60%,#e8c87a);color:#0a0814;font-size:20px;font-weight:800}.send:disabled{opacity:.4;cursor:not-allowed}
+.toast{position:fixed;bottom:18px;left:50%;transform:translateX(-50%) translateY(16px);padding:13px 16px;border-radius:14px;z-index:100;background:rgba(36,10,18,.96);border:1px solid rgba(255,110,130,.45);color:#ffc0c8;font-size:13.5px;font-weight:600;opacity:0;transition:.35s}.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
 </style>
 </head>
 <body>
@@ -91,7 +83,10 @@ body{display:flex;flex-direction:column;min-height:100dvh;overflow:hidden}a{colo
       <div class="avatar">n</div>
       <div><h1><span>n.ai</span></h1><p>Nexus Intelligence · правила · проект · помощь</p></div>
     </div>
-    <div class="live"><i></i> Online</div>
+    <div style="display:flex;flex-direction:column;align-items:flex-end;gap:6px">
+      <div class="live"><i></i> Online</div>
+      <a href="https://alarm.nexusroleplay.ru" target="_blank" rel="noopener" style="font-size:11px;color:#7dd3fc;font-weight:600;text-decoration:none">Север Оператив</a>
+    </div>
   </div>
   <div class="panel">
     <div class="panel-bg"></div>
