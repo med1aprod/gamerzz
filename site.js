@@ -72,7 +72,7 @@
   function bindTilt() {
     document.querySelectorAll('.tilt-card, .glass.card, .member, .feat, .faq-item, .rule-card, .donate-card, .discord-card, .news-card, .loader-box').forEach(function (card) {
       if (card._tiltBound) return;
-      if (card.closest && card.closest('.top')) return; // no tilt on navbar
+      if (card.closest && card.closest('.top')) return;
       card._tiltBound = true;
       card.classList.add('tilt-card');
       card.addEventListener('mousemove', function (e) {
@@ -92,7 +92,6 @@
     var path = location.pathname || '';
     if (path.indexOf('adminroleplay') !== -1) return;
     if (path.indexOf('not-approved') !== -1) {
-      // on maintenance page: still fetch to show texts / leave if off
       fetchPublic().then(function (d) {
         if (!d || !d.ok) return;
         if (d.maintenance !== 'hard') {

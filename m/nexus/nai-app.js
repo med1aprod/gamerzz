@@ -40,7 +40,7 @@
   function setBusy(v){busy=v;sendBtn.disabled=v;typing.classList.toggle("on",v);if(v){scroll.appendChild(typing);scroll.scrollTop=scroll.scrollHeight;}}
   function send(text){
     text=(text||input.value||"").trim();if(!text||busy)return;
-    if(!KEY){showErr("n.ai: укажи groqKey в config.js");return;}
+    if(!KEY){showErr("n.ai: ключ не загрузился. Обнови страницу.");return;}
     input.value="";input.style.height="auto";
     addMsg("user",text);
     if(codeReq(text)){addMsg("assistant",POLICY);history.push({role:"user",content:text},{role:"assistant",content:POLICY});return;}
