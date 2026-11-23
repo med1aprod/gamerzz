@@ -3,6 +3,47 @@
   var CFG = window.NEXUS_CONFIG || {};
   var API = CFG.apiUrl || '';
 
+  /* —— runtime UI patch (n.ai / favicons / Север Оператив) —— */
+  function patchUI() {
+    try {
+      // Favicons
+      if (!document.querySelector('link[href*="favicon-120"]')) {
+        var head = document.head || document.getElementsByTagName('head')[0];
+        function addIcon(href, sizes, rel) {
+          var l = document.createElement('link');
+          l.rel = rel || 'icon';
+          l.type = 'image/png';
+          if (sizes) l.sizes = sizes;
+          l.href = href;
+          head.appendChild(l);
+        }
+        addIcon('/favicon.png', '32x32');
+        addIcon('/favicon-120.png', '120x120');
+        addIcon('/favicon-144.png', '144x144');
+        addIcon('/apple-touch-icon.png', null, 'apple-touch-icon');
+      }
+      // Nav: Intelligence → n.ai
+      document.querySelectorAll('a[href*="intelligence"]').forEach(function (a) {
+        if (/intelligence/i.test(a.textContent) || a.textContent.trim() === 'Intelligence') {
+          a.textContent = 'n.ai';
+        }
+      });
+      // Footer: Север Оператив
+      if (!document.querySelector('a[href*="alarm.nexusroleplay"]') && document.body) {
+        var foot = document.querySelector('footer') || document.createElement('footer');
+        if (!foot.parentNode) {
+          foot.style.cssText = 'margin:28px auto 20px;width:min(1100px,calc(100% - 24px));padding:16px 18px;border-radius:16px;text-align:center;font-size:13px;color:#9b93b3;background:linear-gradient(165deg,rgba(255,255,255,.06),rgba(255,255,255,.02));border:1px solid rgba(255,255,255,.1);backdrop-filter:blur(24px)';
+          document.body.appendChild(foot);
+        }
+        var bar = document.createElement('div');
+        bar.style.cssText = 'display:flex;flex-wrap:wrap;gap:12px 20px;justify-content:center;align-items:center;margin-top:12px';
+        bar.innerHTML = '<a href="https://alarm.nexusroleplay.ru" target="_blank" rel="noopener" style="color:#7dd3fc;font-weight:700;text-decoration:none;display:inline-flex;align-items:center;gap:6px"><span style="width:8px;height:8px;border-radius:50%;background:#37FFD0;box-shadow:0 0 8px #37FFD0"></span>Север Оператив</a>'
+          + '<a href="/m/nexus/intelligence.html" style="color:#c4b5fd;font-weight:600;text-decoration:none">n.ai</a>';
+        foot.appendChild(bar);
+      }
+    } catch (e) {}
+  }
+
   function fetchPublic() {
     if (!API) return Promise.resolve(null);
     var sep = API.indexOf('?') >= 0 ? '&' : '?';
@@ -35,7 +76,6 @@
 
   function applyPublicData(d) {
     if (!d || !d.ok) return;
-
     if (d.maintenance === 'hard') {
       goHardRedirect();
       return;
@@ -89,6 +129,7 @@
   }
 
   function init() {
+    patchUI();
     var path = location.pathname || '';
     if (path.indexOf('adminroleplay') !== -1) return;
     if (path.indexOf('not-approved') !== -1) {
