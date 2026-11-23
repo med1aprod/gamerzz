@@ -2,285 +2,93 @@
 <html lang="ru">
 <head>
 <script>
-  if (window.location.hostname === 'nexusroleplay.ru' || window.location.hostname === 'www.nexusroleplay.ru') {
-    window.location.replace('https://play.nexusroleplay.ru' + window.location.pathname + window.location.search + window.location.hash);
-  }
+if (location.hostname === 'nexusroleplay.ru' || location.hostname === 'www.nexusroleplay.ru') {
+  location.replace('https://play.nexusroleplay.ru' + location.pathname + location.search + location.hash);
+}
 </script>
-
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<link rel="icon" href="/favicon.png" type="image/png" sizes="32x32">
+<link rel="icon" href="/favicon-120.png" type="image/png" sizes="120x120">
+<link rel="icon" href="/favicon-144.png" type="image/png" sizes="144x144">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="theme-color" content="#05040a">
-<link rel="icon" href="/favicon.png" type="image/png">
-<link rel="apple-touch-icon" href="/favicon.png">
-<link rel="stylesheet" href="aurora.css">
-  <link rel="stylesheet" href="site-extras.css">
-  <script src="config.js"></script>
 <title>FAQ — Nexus RP</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;600;700;800&family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="aurora.css">
+<link rel="stylesheet" href="site-extras.css">
+<script src="config.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@600;700;800&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet">
 <style>
-
-
-    :root {
-      --bg: #05040a; --text: #f4f0ff; --muted: #a39bb8;
-      --gold: #e8c87a; --gold-bright: #f5d98a;
-    }
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
-    body {
-      background: var(--bg); color: var(--text);
-      font-family: 'Manrope', system-ui, sans-serif;
-      min-height: 100vh; overflow-x: hidden; line-height: 1.55;
-    }
-    .bg-3d { display: none !important; }
-    a { color: inherit; text-decoration: none; }
-    .wrap { width: min(1140px, calc(100% - 32px)); margin: 0 auto; }
-    .glass {
-      background: linear-gradient(165deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.035) 100%);
-      backdrop-filter: blur(50px) saturate(200%) brightness(1.12);
-      -webkit-backdrop-filter: blur(50px) saturate(200%) brightness(1.12);
-      border: 1px solid rgba(255,255,255,0.18);
-      box-shadow: 0 12px 40px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.28);
-    }
-    .top {
-      position: sticky; top: 12px; z-index: 100;
-      margin: 12px auto 0; width: min(1140px, calc(100% - 24px));
-      padding: 8px 12px 8px 16px; border-radius: 18px;
-    }
-    .nav { display: flex; align-items: center; gap: 10px; position: relative; }
-    .brand {
-      display: flex; align-items: center; gap: 10px;
-      font-family: 'Unbounded', sans-serif; font-weight: 700; letter-spacing: 0.03em; font-size: 14px;
-    }
-    .brand img {
-      width: 32px; height: 32px; object-fit: contain;
-      filter: drop-shadow(0 0 6px rgba(232,200,122,0.5)) brightness(1.08);
-    }
-    .brand b { color: var(--gold-bright); }
-    .links { display: flex; gap: 2px; margin-left: auto; align-items: center; position: relative; }
-    .links a {
-      font-size: 13px; font-weight: 600; color: var(--muted);
-      padding: 8px 12px; border-radius: 11px; transition: 0.2s; white-space: nowrap;
-    }
-    .links a:hover { color: #fff; background: rgba(255,255,255,0.07); }
-    .links a.active {
-      color: #fff; background: rgba(255,255,255,0.1);
-      box-shadow: inset 0 0 0 1px rgba(255,255,255,0.14);
-    }
-    .menu {
-      display: none; margin-left: auto; width: 44px; height: 44px;
-      border: 1px solid rgba(255,255,255,0.14); background: rgba(255,255,255,0.08);
-      color: white; border-radius: 12px; cursor: pointer; font-size: 18px;
-      align-items: center; justify-content: center;
-      -webkit-tap-highlight-color: transparent; touch-action: manipulation;
-    }
-    .nav-indicator {
-      position: absolute; bottom: 0; height: 2px; border-radius: 2px;
-      background: linear-gradient(90deg, #f5d98a, #c9a227);
-      box-shadow: 0 0 10px rgba(232,200,122,0.55);
-      transition: left 0.32s cubic-bezier(0.22, 1, 0.36, 1), width 0.32s cubic-bezier(0.22, 1, 0.36, 1);
-      pointer-events: none;
-    }
-    .cine-header {
-      position: relative; min-height: 34vh;
-      display: flex; flex-direction: column; align-items: center; justify-content: flex-end;
-      padding: 88px 20px 36px; text-align: center;
-    }
-    .cine-header::after {
-      content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 85%;
-      background: linear-gradient(to bottom, transparent 0%, rgba(5,4,10,0.12) 30%, rgba(5,4,10,0.5) 65%, rgba(5,4,10,0.88) 100%);
-      pointer-events: none;
-    }
-    .cine-header .inner { position: relative; z-index: 2; max-width: 640px; }
-    .cine-header .kicker {
-      font-size: 12px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase;
-      color: var(--gold); margin-bottom: 14px;
-    }
-    .cine-header h1 {
-      font-family: 'Unbounded', sans-serif;
-      font-size: clamp(2.4rem, 7vw, 3.6rem); font-weight: 800;
-      letter-spacing: -0.03em; line-height: 1.05; margin-bottom: 14px;
-    }
-    .cine-header h1 span {
-      background: linear-gradient(135deg, #fff 10%, var(--gold-bright) 55%, #e8b060 100%);
-      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
-    }
-    .cine-header .lead { color: var(--muted); font-size: 1.02rem; max-width: 480px; margin: 0 auto; }
-    .footer { padding: 24px 0 36px; border-top: 1px solid rgba(255,255,255,0.05); }
-    .footer-row {
-      display: flex; justify-content: space-between; flex-wrap: wrap; gap: 10px;
-      font-size: 13px; color: var(--muted);
-    }
-    .footer-row span:last-child { color: var(--gold); }
-    .page-loader {
-      position: fixed; inset: 0; z-index: 9999;
-      display: flex; align-items: center; justify-content: center;
-      background: rgba(2,2,8,0.8); backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px);
-      opacity: 0; visibility: hidden; transition: opacity 0.35s, visibility 0.35s;
-    }
-    .page-loader.active { opacity: 1; visibility: visible; }
-    .loader-box {
-      width: min(360px, calc(100% - 32px)); padding: 32px 28px; border-radius: 22px; text-align: center;
-      transform: scale(0.92) translateY(12px); transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
-    }
-    .page-loader.active .loader-box { transform: scale(1) translateY(0); }
-    .loader-spinner {
-      width: 40px; height: 40px; margin: 0 auto 16px;
-      border: 2px solid rgba(232,200,122,0.15); border-top-color: var(--gold-bright);
-      border-radius: 50%; animation: spin 0.75s linear infinite;
-    }
-    @keyframes spin { to { transform: rotate(360deg); } }
-    .loader-title { font-family: 'Unbounded', sans-serif; font-size: 0.95rem; font-weight: 600; margin-bottom: 6px; color: var(--gold-bright); }
-    .loader-sub { font-size: 13px; color: var(--muted); }
-    @media (max-width: 900px) {
-      .nav-indicator { display: none !important; }
-      .menu { display: flex; }
-      .links {
-        display: none; position: fixed; top: 72px; left: 12px; right: 12px;
-        flex-direction: column; gap: 6px; padding: 14px; border-radius: 18px; z-index: 999;
-        background: rgba(6, 5, 14, 0.97) !important; backdrop-filter: blur(40px);
-        border: 1px solid rgba(255,255,255,0.14); box-shadow: 0 28px 64px rgba(0,0,0,0.75);
-      }
-      .links.open { display: flex !important; }
-      .links a { display: flex; width: 100%; padding: 15px 16px; font-size: 15px; border-radius: 14px; }
-      .links a.active {
-        background: linear-gradient(135deg, rgba(232,200,122,0.16), rgba(100,50,180,0.12));
-        color: #f5d98a;
-      }
-      .cine-header { min-height: 30vh; padding: 72px 16px 28px; }
-    }
-
-
-
-    @media (max-width: 900px) {
-    }
-
-  
-
-    .faq-list { max-width: 700px; margin: 0 auto 80px; display: flex; flex-direction: column; gap: 10px; }
-    .faq-item { border-radius: 16px; overflow: hidden; transition: border-color 0.3s; }
-    .faq-item.open { border-color: rgba(232,200,122,0.3); }
-    .faq-q {
-      padding: 16px 20px; cursor: pointer; font-weight: 700; font-size: 0.98rem;
-      display: flex; justify-content: space-between; align-items: center; user-select: none;
-    }
-    .faq-q .icon { font-size: 1.2rem; color: var(--gold); transition: transform 0.3s; flex-shrink: 0; }
-    .faq-item.open .faq-q .icon { transform: rotate(45deg); }
-    .faq-a {
-      max-height: 0; overflow: hidden; opacity: 0; padding: 0 20px;
-      color: var(--muted); font-size: 0.93rem;
-      transition: max-height 0.4s cubic-bezier(0.22,1,0.36,1), opacity 0.3s ease, padding 0.3s ease;
-    }
-    .faq-item.open .faq-a { max-height: 220px; opacity: 1; padding: 0 20px 16px; }
-
+:root{--bg:#05040a;--text:#f4f0ff;--muted:#9b93b3;--gold:#e8c87a;--line:rgba(255,255,255,.12)}
+*{box-sizing:border-box;margin:0;padding:0}body{min-height:100vh;background:var(--bg);color:var(--text);font-family:Manrope,system-ui,sans-serif}
+a{color:inherit;text-decoration:none}
+.glass{background:linear-gradient(165deg,rgba(255,255,255,.1),rgba(255,255,255,.03));backdrop-filter:blur(40px) saturate(180%);border:1px solid rgba(255,255,255,.14);box-shadow:0 10px 40px rgba(0,0,0,.35),inset 0 1px 0 rgba(255,255,255,.18)}
+.top{position:fixed;top:12px;left:50%;transform:translateX(-50%);z-index:50;width:min(1100px,calc(100% - 24px));padding:8px 14px;border-radius:18px}
+.nav{display:flex;align-items:center;gap:10px}.brand{display:flex;align-items:center;gap:10px;font-family:Unbounded,sans-serif;font-weight:700;font-size:14px}
+.brand img{width:32px;height:32px;object-fit:contain;filter:drop-shadow(0 0 8px rgba(232,200,122,.5))}.brand b{color:var(--gold)}
+.links{display:flex;gap:2px;margin-left:auto;flex-wrap:wrap}.links a{font-size:13px;font-weight:600;color:var(--muted);padding:8px 12px;border-radius:12px}.links a:hover{color:#fff;background:rgba(255,255,255,.07)}.links a.active{color:#fff;background:rgba(232,200,122,.12);box-shadow:inset 0 0 0 1px rgba(232,200,122,.28)}
+.menu{display:none;width:42px;height:42px;border-radius:12px;border:1px solid var(--line);background:rgba(255,255,255,.06);color:#fff;cursor:pointer;margin-left:auto}
+@media(max-width:980px){.menu{display:flex}.links{display:none;position:fixed;top:70px;left:12px;right:12px;flex-direction:column;padding:14px;border-radius:18px;background:rgba(8,6,18,.96)!important;border:1px solid var(--line);z-index:60}.links.open{display:flex!important}.links a{padding:14px 16px;font-size:15px}}
+.wrap{width:min(900px,calc(100% - 28px));margin:0 auto;padding:100px 0 40px}
+.page-title{font-family:Unbounded,sans-serif;font-size:clamp(1.8rem,5vw,2.6rem);font-weight:800;margin-bottom:8px}
+.page-title span{background:linear-gradient(135deg,#fff,#f5d98a);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.lead{color:var(--muted);margin-bottom:28px;line-height:1.5}
+.faq-item{border-radius:16px;margin-bottom:12px;overflow:hidden;border:1px solid rgba(255,255,255,.1);background:rgba(255,255,255,.04)}
+.faq-q{width:100%;text-align:left;padding:16px 18px;background:transparent;border:0;color:#fff;font:700 15px Manrope,sans-serif;cursor:pointer;display:flex;justify-content:space-between;gap:12px}
+.faq-q span{color:var(--gold);transition:.25s}.faq-item.open .faq-q span{transform:rotate(45deg)}
+.faq-a{max-height:0;overflow:hidden;transition:max-height .35s ease,padding .35s ease;padding:0 18px;color:#c8c0d8;line-height:1.55;font-size:14px}
+.faq-item.open .faq-a{max-height:400px;padding:0 18px 16px}
 </style>
 </head>
 <body>
-  <div class="page-loader" id="pageLoader">
-    <div class="loader-box glass">
-      <div class="loader-spinner"></div>
-      <div class="loader-title" id="loaderTitle">Инициализация...</div>
-      <div class="loader-sub" id="loaderSub">Подготовка перехода</div>
-    </div>
-  </div>
-  <header class="top glass">
-    <nav class="nav">
-      <a class="brand" href="index.html"><img src="logo.png?v=2" alt="Nexus"> NEXUS <b>RP</b></a>
-      <button type="button" class="menu" aria-label="Меню" aria-expanded="false">☰</button>
-      <div class="links"><a href="index.html">Главная</a><a href="donate.html">Донат</a><a href="discord.html">Discord</a><a href="rules.html">Правила</a><a href="news.html">Новости</a><a href="team.html">Команда</a><a href="m/nexus/intelligence.html">Intelligence</a>
-        <a href="faq.html" class="active">FAQ</a></div>
-    </nav>
-  </header>
-
-  <section class="cine-header"><div class="inner">
-    <div class="kicker">ПОМОЩЬ</div>
-    <h1><span>FAQ</span></h1>
-    <p class="lead">Ответы на частые вопросы о Roblox-проекте Nexus RP.</p>
-  </div></section>
-  <div class="wrap"><div class="faq-list" id="faqList">
-    <div class="faq-item glass"><div class="faq-q">Что такое Nexus RP?<span class="icon">+</span></div><div class="faq-a">Nexus RP — Roblox RolePlay проект. Сервер готовится к открытию: правила, команда и сообщество уже доступны на сайте и в Discord.</div></div>
-    <div class="faq-item glass"><div class="faq-q">Когда откроется сервер?<span class="icon">+</span></div><div class="faq-a">Точная дата открытия Roblox-сервера пока не объявлена. Следите за новостями на сайте и в Discord — анонс будет заранее.</div></div>
-    <div class="faq-item glass"><div class="faq-q">Есть ли Roblox-группа?<span class="icon">+</span></div><div class="faq-a">Отдельной Roblox-группы сообщества пока нет. Основное общение и анонсы — в Discord; игра будет в Roblox.</div></div>
-    <div class="faq-item glass"><div class="faq-q">Как поддержать проект?<span class="icon">+</span></div><div class="faq-a">Единственный способ доната — через ссылку на странице «Донат» (Nexus ELITE). Важно: выключите возмещение комиссии, укажите почту и ники в нужных полях.</div></div>
-    <div class="faq-item glass"><div class="faq-q">Где читать правила?<span class="icon">+</span></div><div class="faq-a">Основные ролевые правила, ПГО и таблица наказаний — на странице «Правила».</div></div>
-    <div class="faq-item glass"><div class="faq-q">Как связаться с администрацией?<span class="icon">+</span></div><div class="faq-a">Через официальный Discord-сервер. Там есть каналы поддержки и обращения.</div></div>
-  </div></div>
-
-  <footer class="footer">
-    <div class="wrap footer-row">
-      <span>© 2026 NEXUS RP · Roblox RolePlay</span>
-      <span>Твоя новая история.</span>
-    </div>
-  </footer>
+<header class="top glass"><nav class="nav">
+<a class="brand" href="/index.html"><img src="logo.png?v=2" alt="">NEXUS <b>RP</b></a>
+<button type="button" class="menu" aria-label="Меню">☰</button>
+<div class="links">
+<a href="/index.html">Главная</a>
+<a href="/donate.html">Донат</a>
+<a href="/discord.html">Discord</a>
+<a href="/rules.html">Правила</a>
+<a href="/news.html">Новости</a>
+<a href="/team.html">Команда</a>
+<a href="/m/nexus/intelligence.html">n.ai</a>
+<a href="/faq.html" class="active">FAQ</a>
+</div></nav></header>
+<main class="wrap">
+<h1 class="page-title"><span>FAQ</span></h1>
+<p class="lead">Частые вопросы про Nexus RP — Roblox RolePlay проект.</p>
+<div class="faq-item"><button type="button" class="faq-q">Что такое Nexus RP? <span>+</span></button><div class="faq-a">Nexus RP — RolePlay проект в Roblox с акцентом на атмосферу, правила и живое сообщество. Играй персонажа, соблюдай RP-стандарты и развивайся в мире проекта.</div></div>
+<div class="faq-item"><button type="button" class="faq-q">Где Discord? <span>+</span></button><div class="faq-a">Официальный Discord: <a href="https://discord.gg/gRdeVkG5vf" style="color:#7dd3fc">discord.gg/gRdeVkG5vf</a>. Там новости, поддержка и набор.</div></div>
+<div class="faq-item"><button type="button" class="faq-q">Как донатить? <span>+</span></button><div class="faq-a">Страница <a href="/donate.html" style="color:#f5d98a">Донат</a> — пакет Nexus ELITE через CloudTips. Перед оплатой читай дисклеймер.</div></div>
+<div class="faq-item"><button type="button" class="faq-q">Где правила и наказания? <span>+</span></button><div class="faq-a">Полный список на странице <a href="/rules.html" style="color:#f5d98a">Правила</a>. Есть поиск и таблица наказаний.</div></div>
+<div class="faq-item"><button type="button" class="faq-q">Что такое n.ai? <span>+</span></button><div class="faq-a">n.ai — интеллект от создателей Nexus RP. Отвечает по правилам и проекту: <a href="/m/nexus/intelligence.html" style="color:#7dd3fc">открыть чат</a>.</div></div>
+<div class="faq-item"><button type="button" class="faq-q">Что такое Север Оператив? <span>+</span></button><div class="faq-a">Сервис тревог (ракеты / БПЛА) проекта: <a href="https://alarm.nexusroleplay.ru" target="_blank" rel="noopener" style="color:#7dd3fc">alarm.nexusroleplay.ru</a>.</div></div>
+</main>
+<footer class="site-footer" style="margin:28px auto 20px;width:min(1100px,calc(100% - 24px));padding:16px 18px;border-radius:16px;text-align:center;font-size:13px;color:#9b93b3;background:linear-gradient(165deg,rgba(255,255,255,.06),rgba(255,255,255,.02));border:1px solid rgba(255,255,255,.1);backdrop-filter:blur(24px)">
+<div style="display:flex;flex-wrap:wrap;gap:12px 20px;justify-content:center;align-items:center">
+<span>Nexus RP · Roblox RolePlay</span>
+<a href="https://alarm.nexusroleplay.ru" target="_blank" rel="noopener" style="color:#7dd3fc;font-weight:700;text-decoration:none;display:inline-flex;align-items:center;gap:6px"><span style="width:8px;height:8px;border-radius:50%;background:#37FFD0;box-shadow:0 0 8px #37FFD0"></span>Север Оператив</a>
+<a href="/m/nexus/intelligence.html" style="color:#c4b5fd;font-weight:600;text-decoration:none">n.ai</a>
+<a href="/discord.html" style="color:#9b93b3;text-decoration:none">Discord</a>
+</div>
+<div style="margin-top:8px;font-size:11px;opacity:.75">Оперативные тревоги · ракеты и БПЛА · alarm.nexusroleplay.ru</div>
+</footer>
 <script src="site.js" defer></script>
 <script src="aurora.js" defer></script>
 <script>
 (function(){
-  var btn=document.querySelector('.menu'),links=document.querySelector('.links');
-  if(btn&&links){
-    var ignore=false;
-    function close(){links.classList.remove('open');btn.setAttribute('aria-expanded','false');}
-    function open(){links.classList.add('open');btn.setAttribute('aria-expanded','true');}
-    function toggle(){if(links.classList.contains('open'))close();else open();}
-    btn.addEventListener('click',function(e){e.preventDefault();e.stopPropagation();if(ignore){ignore=false;return;}toggle();});
-    btn.addEventListener('touchend',function(e){e.preventDefault();e.stopPropagation();ignore=true;toggle();},{passive:false});
-    document.addEventListener('click',function(e){if(!links.classList.contains('open'))return;if(links.contains(e.target)||btn.contains(e.target))return;close();});
-    links.querySelectorAll('a').forEach(function(a){a.addEventListener('click',close);});
-  }
-})();
-(function(){
-  function setup(){
-    if(window.matchMedia('(max-width:900px)').matches)return;
-    var links=document.querySelector('.links');
-    if(!links||links.querySelector('.nav-indicator'))return;
-    var items=[].slice.call(links.querySelectorAll('a'));
-    if(!items.length)return;
-    var ind=document.createElement('div');ind.className='nav-indicator';links.appendChild(ind);
-    function moveTo(el){if(!el)return;var lr=links.getBoundingClientRect(),er=el.getBoundingClientRect();ind.style.width=Math.max(14,er.width-6)+'px';ind.style.left=(er.left-lr.left+3)+'px';}
-    function active(){return links.querySelector('a.active')||items[0];}
-    requestAnimationFrame(function(){moveTo(active());});
-    setTimeout(function(){moveTo(active());},80);
-    window.addEventListener('resize',function(){if(!window.matchMedia('(max-width:900px)').matches)moveTo(active());});
-    items.forEach(function(a){a.addEventListener('mouseenter',function(){moveTo(a);});});
-    links.addEventListener('mouseleave',function(){moveTo(active());});
-  }
-  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',setup);else setup();
-})();
-(function(){
-  var internal=[{title:"Инициализация...",sub:"Подготовка перехода"},{title:"Синхронизация...",sub:"Загрузка данных Nexus"},{title:"Почти готово",sub:"Формирование маршрута"},{title:"Переход...",sub:"Открываем страницу"}];
-  var external=[{title:"Проверка безопасности...",sub:"Анализ внешнего ресурса"},{title:"Верификация ссылки...",sub:"Защита соединения"},{title:"Готово",sub:"Безопасный переход"}];
-  function run(href,ext){
-    var loader=document.getElementById('pageLoader'),titleEl=document.getElementById('loaderTitle'),subEl=document.getElementById('loaderSub');
-    if(!loader){if(ext)window.open(href,'_blank','noopener');else location.href=href;return;}
-    var phrases=ext?external:internal;loader.classList.add('active');var i=0;
-    if(titleEl)titleEl.textContent=phrases[0].title;if(subEl)subEl.textContent=phrases[0].sub;
-    var iv=setInterval(function(){i++;if(i<phrases.length){if(titleEl)titleEl.textContent=phrases[i].title;if(subEl)subEl.textContent=phrases[i].sub;}},ext?400:280);
-    setTimeout(function(){clearInterval(iv);if(ext){window.open(href,'_blank','noopener');loader.classList.remove('active');}else location.href=href;},ext?(1100+Math.random()*400):(650+Math.random()*350));
-  }
-  document.querySelectorAll('a[href]').forEach(function(link){
-    link.addEventListener('click',function(e){
-      var href=link.getAttribute('href');if(!href||href.charAt(0)==='#')return;
-      if(link.hasAttribute('data-external')||/^https?:\/\//i.test(href)){e.preventDefault();run(href,true);return;}
-      if(/\.html($|\?|#)/.test(href)){e.preventDefault();run(href,false);}
-    });
-  });
-})();
-</script>
-
-
-
-</body>
-
-<script>
-(function(){
-  document.querySelectorAll('.faq-q').forEach(function(q){
+  var menu=document.querySelector('.menu'), links=document.querySelector('.links');
+  if(menu&&links){menu.addEventListener('click',function(e){e.stopPropagation();links.classList.toggle('open');});document.addEventListener('click',function(e){if(!links.contains(e.target)&&e.target!==menu)links.classList.remove('open');});}
+  document.querySelectorAll('.faq-item').forEach(function(item){
+    var q=item.querySelector('.faq-q');
+    if(!q)return;
     q.addEventListener('click',function(){
-      var item=q.parentElement;var was=item.classList.contains('open');
-      document.querySelectorAll('.faq-item').forEach(function(i){i.classList.remove('open');});
-      if(!was)item.classList.add('open');
+      var open=item.classList.contains('open');
+      document.querySelectorAll('.faq-item.open').forEach(function(x){x.classList.remove('open');});
+      if(!open)item.classList.add('open');
     });
   });
 })();
 </script>
-
+</body>
 </html>
