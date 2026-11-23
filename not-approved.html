@@ -1,1 +1,71 @@
-PLACEHOLDER_WILL_REPLACE
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<script>
+  if (window.location.hostname === 'nexusroleplay.ru' || window.location.hostname === 'www.nexusroleplay.ru') {
+    window.location.replace('https://play.nexusroleplay.ru' + window.location.pathname + window.location.search + window.location.hash);
+  }
+</script>
+  <meta charset="utf-8">
+  <link rel="icon" href="/favicon.png" type="image/png" sizes="32x32">
+  <link rel="icon" href="/favicon-120.png" type="image/png" sizes="120x120">
+  <link rel="icon" href="/favicon-144.png" type="image/png" sizes="144x144">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex">
+  <meta name="theme-color" content="#05040a">
+  <title>Технические работы — Nexus RP</title>
+  <link rel="stylesheet" href="aurora.css">
+  <link rel="stylesheet" href="site-extras.css">
+  <script src="config.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@600;700;800&family=Manrope:wght@500;600;700&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { height: 100%; }
+    body {
+      min-height: 100vh; background: #05040a; color: #f4f0ff;
+      font-family: Manrope, system-ui, sans-serif;
+      display: flex; align-items: center; justify-content: center;
+      overflow: hidden; text-align: center;
+    }
+    .stage { position: relative; z-index: 2; padding: 32px 24px; max-width: 520px; }
+    .logo-wrap {
+      width: 96px; height: 96px; margin: 0 auto 28px;
+      filter: drop-shadow(0 0 28px rgba(232,200,122,0.45));
+      animation: float 4s ease-in-out infinite;
+    }
+    .logo-wrap img { width: 100%; height: 100%; object-fit: contain; }
+    @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+    .brand {
+      font-family: Unbounded, sans-serif; font-weight: 800;
+      font-size: clamp(2.4rem, 8vw, 3.6rem); letter-spacing: -0.03em;
+      line-height: 1; margin-bottom: 10px;
+    }
+    .brand span {
+      background: linear-gradient(135deg, #fff 10%, #f5d98a 55%, #e8b060 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    }
+    .kicker { font-size: 12px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: #a39bb8; margin-bottom: 22px; }
+    h1 { font-family: Unbounded, sans-serif; font-size: 1.35rem; font-weight: 700; margin-bottom: 12px; }
+    p { color: #a39bb8; font-size: 1rem; line-height: 1.55; margin-bottom: 28px; }
+    .btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 14px 26px; border-radius: 14px; font-weight: 700; font-size: 14px;
+      background: linear-gradient(135deg, #5865F2, #4752c4); color: #fff; text-decoration: none;
+      box-shadow: 0 10px 32px rgba(88,101,242,0.4);
+    }
+  </style>
+</head>
+<body>
+  <div class="stage">
+    <div class="logo-wrap"><img src="logo.png?v=2" alt="Nexus RP"></div>
+    <div class="brand"><span>NEXUS</span></div>
+    <div class="kicker">Roblox RolePlay</div>
+    <h1 id="naTitle">Технические работы</h1>
+    <p id="naText">Сайт временно недоступен. Мы скоро вернёмся — следите за Discord.</p>
+    <a class="btn" id="naDiscord" href="https://discord.gg/gRdeVkG5vf" target="_blank" rel="noopener">Открыть Discord</a>
+  </div>
+  <script src="site.js" defer></script>
+  <script src="aurora.js" defer></script>
+</body>
+</html>
