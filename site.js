@@ -3,10 +3,170 @@
   var CFG = window.NEXUS_CONFIG || {};
   var API = CFG.apiUrl || '';
 
-  /* —— runtime UI patch (n.ai / favicons / Север Оператив) —— */
+  function injectSeo() {
+    try {
+      if (document.querySelector('meta[data-nexus-seo]')) return;
+      var head = document.head || document.getElementsByTagName('head')[0];
+      if (!head) return;
+      var path = (location.pathname || '/').replace(/\/+$/, '') || '/';
+      var map = {
+        '/': {
+          title: 'Nexus RP — Roblox RolePlay сервер | Официальный сайт',
+          desc: 'Nexus RP — премиальный Roblox RolePlay проект. Правила, донат, Discord, новости, n.ai помощник. RolePlay сервер с живым сообществом.',
+          kw: 'Nexus RP, Roblox RP, Roblox RolePlay, ролекс рп, роблокс рп сервер, nexus roleplay, nexusroleplay, ролевая игра roblox, правила рп, demorgan, roblox россия'
+        },
+        '/index.html': {
+          title: 'Nexus RP — Roblox RolePlay сервер | Официальный сайт',
+          desc: 'Nexus RP — премиальный Roblox RolePlay проект. Правила, донат, Discord, новости, n.ai помощник.',
+          kw: 'Nexus RP, Roblox RP, Roblox RolePlay, ролекс рп, nexus roleplay'
+        },
+        '/rules.html': {
+          title: 'Правила Nexus RP — RP, ПГО, наказания | Roblox RolePlay',
+          desc: 'Официальные правила Nexus RP: DM, DB, PG, SK, TK, NRP, RK, MG, Mass DM, Bug Abuse. ПГО и форум наказаний.',
+          kw: 'правила nexus rp, demorgan, spawnkill, deathmatch, powergaming, roblox rp правила'
+        },
+        '/donate.html': {
+          title: 'Донат Nexus ELITE — поддержка Nexus RP | Roblox',
+          desc: 'Поддержать Roblox-проект Nexus RP. Пакет Nexus ELITE через CloudTips. Инструкция по оплате 218 ₽.',
+          kw: 'донат nexus rp, nexus elite, cloudtips, поддержать сервер roblox'
+        },
+        '/discord.html': {
+          title: 'Discord Nexus RP — сообщество Roblox RolePlay',
+          desc: 'Официальный Discord Nexus RP: новости, анонсы, поддержка, общение игроков Roblox RolePlay.',
+          kw: 'discord nexus rp, роблокс дискорд, nexus roleplay discord'
+        },
+        '/news.html': {
+          title: 'Новости Nexus RP — обновления Roblox RolePlay',
+          desc: 'Официальные новости и анонсы проекта Nexus RP.',
+          kw: 'новости nexus rp, обновления roblox rp'
+        },
+        '/team.html': {
+          title: 'Команда Nexus RP — администрация проекта',
+          desc: 'Команда Nexus RP: основатели, совет директоров, разработка и PR.',
+          kw: 'команда nexus rp, администрация roblox rp'
+        },
+        '/faq.html': {
+          title: 'FAQ Nexus RP — частые вопросы Roblox RolePlay',
+          desc: 'Ответы на частые вопросы о Nexus RP: Discord, донат, правила, n.ai, Север Оператив.',
+          kw: 'faq nexus rp, вопросы roblox roleplay'
+        },
+        '/m/nexus/intelligence.html': {
+          title: 'n.ai — Nexus Intelligence | ИИ-помощник Nexus RP',
+          desc: 'n.ai — официальный интеллект Nexus RP. Правила, наказания, донат, Discord. Помощник по проекту.',
+          kw: 'n.ai, nexus intelligence, ии nexus rp, помощник roblox rp'
+        }
+      };
+      var page = map[path] || map[path + '.html'] || map['/'];
+      if (path.indexOf('intelligence') !== -1) page = map['/m/nexus/intelligence.html'];
+      var origin = location.origin || 'https://play.nexusroleplay.ru';
+      var url = origin + (path === '/' ? '/' : path);
+      var img = origin + '/favicon-144.png';
+
+      function add(attr, key, val) {
+        if (!val) return;
+        var m = document.createElement('meta');
+        m.setAttribute('data-nexus-seo', '1');
+        if (attr === 'name') m.setAttribute('name', key);
+        else m.setAttribute('property', key);
+        m.setAttribute('content', val);
+        head.appendChild(m);
+      }
+
+      if (page.title && !document.querySelector('title')) {
+        var t = document.createElement('title');
+        t.textContent = page.title;
+        head.appendChild(t);
+      } else if (page.title && document.title && document.title.length < 12) {
+        document.title = page.title;
+      }
+
+      add('name', 'description', page.desc);
+      add('name', 'keywords', page.kw);
+      add('name', 'author', 'Nexus RP');
+      add('name', 'robots', 'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1');
+      add('name', 'googlebot', 'index, follow');
+      add('name', 'yandex', 'index, follow');
+      add('name', 'language', 'Russian');
+      add('name', 'revisit-after', '3 days');
+      add('name', 'rating', 'general');
+      add('name', 'theme-color', '#05040a');
+      add('name', 'msapplication-TileColor', '#05040a');
+      add('name', 'application-name', 'Nexus RP');
+      add('name', 'apple-mobile-web-app-title', 'Nexus RP');
+      add('name', 'apple-mobile-web-app-capable', 'yes');
+      add('name', 'format-detection', 'telephone=no');
+      add('name', 'geo.region', 'RU');
+      add('name', 'geo.placename', 'Russia');
+
+      // Open Graph
+      add('property', 'og:type', 'website');
+      add('property', 'og:locale', 'ru_RU');
+      add('property', 'og:site_name', 'Nexus RP');
+      add('property', 'og:title', page.title);
+      add('property', 'og:description', page.desc);
+      add('property', 'og:url', url);
+      add('property', 'og:image', img);
+      add('property', 'og:image:width', '144');
+      add('property', 'og:image:height', '144');
+      add('property', 'og:image:alt', 'Nexus RP — Roblox RolePlay');
+
+      // Twitter / X
+      add('name', 'twitter:card', 'summary');
+      add('name', 'twitter:title', page.title);
+      add('name', 'twitter:description', page.desc);
+      add('name', 'twitter:image', img);
+
+      // Yandex
+      add('name', 'yandex-verification', '');
+      var ya = document.createElement('meta');
+      ya.setAttribute('data-nexus-seo', '1');
+      ya.setAttribute('name', 'viewport');
+      // skip duplicate viewport
+
+      // JSON-LD
+      if (!document.getElementById('nexus-jsonld')) {
+        var ld = document.createElement('script');
+        ld.type = 'application/ld+json';
+        ld.id = 'nexus-jsonld';
+        ld.setAttribute('data-nexus-seo', '1');
+        ld.textContent = JSON.stringify({
+          '@context': 'https://schema.org',
+          '@type': 'WebSite',
+          'name': 'Nexus RP',
+          'alternateName': ['Nexus RolePlay', 'NexusRP', 'Нексус РП'],
+          'url': origin + '/',
+          'description': page.desc,
+          'inLanguage': 'ru-RU',
+          'potentialAction': {
+            '@type': 'SearchAction',
+            'target': origin + '/rules.html?q={search_term_string}',
+            'query-input': 'required name=search_term_string'
+          },
+          'publisher': {
+            '@type': 'Organization',
+            'name': 'Nexus RP',
+            'url': origin + '/',
+            'logo': { '@type': 'ImageObject', 'url': img },
+            'sameAs': ['https://discord.gg/gRdeVkG5vf', 'https://alarm.nexusroleplay.ru']
+          }
+        });
+        head.appendChild(ld);
+      }
+
+      var can = document.querySelector('link[rel="canonical"]');
+      if (!can) {
+        can = document.createElement('link');
+        can.rel = 'canonical';
+        can.href = url;
+        can.setAttribute('data-nexus-seo', '1');
+        head.appendChild(can);
+      }
+    } catch (e) {}
+  }
+
   function patchUI() {
     try {
-      // Favicons
+      injectSeo();
       if (!document.querySelector('link[href*="favicon-120"]')) {
         var head = document.head || document.getElementsByTagName('head')[0];
         function addIcon(href, sizes, rel) {
@@ -22,13 +182,11 @@
         addIcon('/favicon-144.png', '144x144');
         addIcon('/apple-touch-icon.png', null, 'apple-touch-icon');
       }
-      // Nav: Intelligence → n.ai
       document.querySelectorAll('a[href*="intelligence"]').forEach(function (a) {
         if (/intelligence/i.test(a.textContent) || a.textContent.trim() === 'Intelligence') {
           a.textContent = 'n.ai';
         }
       });
-      // Footer: Север Оператив
       if (!document.querySelector('a[href*="alarm.nexusroleplay"]') && document.body) {
         var foot = document.querySelector('footer') || document.createElement('footer');
         if (!foot.parentNode) {
