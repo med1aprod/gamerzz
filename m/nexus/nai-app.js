@@ -1,12 +1,11 @@
 (function(){
   var CFG=window.NEXUS_CONFIG||{};
   var BASE="https://api.groq.com/openai/v1";
-  var MODEL=(CFG&&CFG.groqModel)||"llama-3.3-70b-versatile";
+  var MODEL=(CFG&&CFG.groqModel)||"qwen/qwen3.8-27b";
   var SYSTEM="Ты — n.ai, официальный интеллект Nexus RP от создателей проекта. Только имя n.ai. Никогда не называй Llama, Qwen, Meta, Groq, OpenAI. Русский язык. НИКОГДА не пиши код/скрипты/HTML/CSS/JS/Python. На такие просьбы: «Я конечно могу сделать, но политика Nexus Intelligence ограничивает это.» Правила: DM 60–120 demorgan; DB 45–90; PG 60/WARN; SK WARN/Ban 3д; TK 120/WARN; NRP 30–90; RK 60; MG 30; Mass DM Ban 7–15; Bug Abuse 120/Ban 7. Discord https://discord.gg/gRdeVkG5vf Донат https://pay.cloudtips.ru/p/3eaaca3d 218₽. Север Оператив https://alarm.nexusroleplay.ru. Разметка: # ## **факт** [текст](url) таблицы.";
   var POLICY="Я конечно могу сделать, но политика Nexus Intelligence ограничивает это.";
   var history=[{role:"system",content:SYSTEM}], busy=false;
   var scroll=document.getElementById("scroll"), input=document.getElementById("input"), sendBtn=document.getElementById("send"), typing=document.getElementById("typing"), toast=document.getElementById("toast");
-
   function resolveKey(){
     var c=window.NEXUS_CONFIG||CFG||{};
     if(c.groqKey) return c.groqKey;
@@ -22,7 +21,6 @@
     }catch(e){}
     return "";
   }
-
   function showErr(m){toast.textContent=m;toast.classList.add("show");setTimeout(function(){toast.classList.remove("show");},4800);}
   function esc(s){return String(s||"").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");}
   function codeReq(t){t=(t||"").toLowerCase();return ["напиши код","напиши скрипт","write code","javascript","python","```","function(","сделай бота","чит "].some(function(k){return t.indexOf(k)!==-1;});}
@@ -57,7 +55,7 @@
   function send(text){
     text=(text||input.value||"").trim();if(!text||busy)return;
     var KEY=resolveKey();
-    if(!KEY){showErr("n.ai: config.js не отдал ключ. Проверь /config.js на сайте.");return;}
+    if(!KEY){showErr("n.ai: config.js не отдал ключ. Проверь /config.js");return;}
     input.value="";input.style.height="auto";
     addMsg("user",text);
     if(codeReq(text)){addMsg("assistant",POLICY);history.push({role:"user",content:text},{role:"assistant",content:POLICY});return;}
