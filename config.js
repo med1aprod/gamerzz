@@ -2,8 +2,7 @@ window.NEXUS_CONFIG = {
   apiUrl: "https://script.google.com/macros/s/AKfycbzdeoLqQk0tN4NJGU7rt2K-l4B_BenJitbyZ8y1xc2iAS-ILC92PXNq5M_huApNUU21DA/exec",
   discordInvite: "https://discord.gg/gRdeVkG5vf",
   alarmUrl: "https://alarm.nexusroleplay.ru",
-  groqModel: "qwen/qwen3.8-27b",
-  /* runtime secret fragments — do not edit */
+  groqModel: "llama-3.3-70b-versatile",
   _k: ["KRYTKjdmJxpeXiwYb19hBlF9N", "SNSIQMpLzIXKzIeKHclOGJjBk", "NSGxUlMhwJKjobKWIYZxtYOSw="]
 };
 (function () {
