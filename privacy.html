@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<script>
+if (location.hostname === 'nexusroleplay.ru' || location.hostname === 'www.nexusroleplay.ru') {
+  location.replace('https://play.nexusroleplay.ru' + location.pathname + location.search + location.hash);
+}
+</script>
+<meta charset="utf-8">
+<link rel="icon" href="/favicon.png" type="image/png" sizes="32x32">
+<link rel="icon" href="/favicon-120.png" type="image/png" sizes="120x120">
+<link rel="icon" href="/favicon-144.png" type="image/png" sizes="144x144">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#05040a">
+<title>Политика конфиденциальности — Nexus RP</title>
+<meta name="description" content="Политика конфиденциальности сайта Nexus RP и входа через Roblox OAuth.">
+<link rel="stylesheet" href="aurora.css">
+<link rel="stylesheet" href="site-extras.css">
+<script src="config.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@600;700;800&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#05040a;--text:#f4f0ff;--muted:#9b93b3;--gold:#e8c87a;--line:rgba(255,255,255,.12);--cyan:#7dd3fc}
+*{box-sizing:border-box;margin:0;padding:0}body{min-height:100vh;background:var(--bg);color:var(--text);font-family:Manrope,system-ui,sans-serif}
+a{color:var(--cyan);text-decoration:none}a:hover{text-decoration:underline}
+.glass{background:linear-gradient(165deg,rgba(255,255,255,.1),rgba(255,255,255,.03));backdrop-filter:blur(40px) saturate(180%);border:1px solid rgba(255,255,255,.14);box-shadow:0 10px 40px rgba(0,0,0,.35),inset 0 1px 0 rgba(255,255,255,.18)}
+.top{position:fixed;top:12px;left:50%;transform:translateX(-50%);z-index:50;width:min(1100px,calc(100% - 24px));padding:8px 14px;border-radius:18px}
+.nav{display:flex;align-items:center;gap:10px}.brand{display:flex;align-items:center;gap:10px;font-family:Unbounded,sans-serif;font-weight:700;font-size:14px;color:inherit;text-decoration:none}
+.brand img{width:32px;height:32px;object-fit:contain;filter:drop-shadow(0 0 8px rgba(232,200,122,.5))}.brand b{color:var(--gold)}
+.links{display:flex;gap:2px;margin-left:auto;flex-wrap:wrap}.links a{font-size:13px;font-weight:600;color:var(--muted);padding:8px 12px;border-radius:12px;text-decoration:none}.links a:hover{color:#fff;background:rgba(255,255,255,.07);text-decoration:none}
+.menu{display:none;width:42px;height:42px;border-radius:12px;border:1px solid var(--line);background:rgba(255,255,255,.06);color:#fff;cursor:pointer;margin-left:auto}
+@media(max-width:980px){.menu{display:flex;align-items:center;justify-content:center}.links{display:none;position:fixed;top:70px;left:12px;right:12px;flex-direction:column;padding:14px;border-radius:18px;background:rgba(8,6,18,.96)!important;border:1px solid var(--line);z-index:60}.links.open{display:flex!important}.links a{padding:14px 16px;font-size:15px}}
+.wrap{width:min(820px,calc(100% - 28px));margin:0 auto;padding:100px 0 48px}
+.page-title{font-family:Unbounded,sans-serif;font-size:clamp(1.6rem,4.5vw,2.3rem);font-weight:800;margin-bottom:8px}
+.page-title span{background:linear-gradient(135deg,#fff,#7dd3fc,#f5d98a);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.lead{color:var(--muted);margin-bottom:8px;line-height:1.55;font-size:15px}
+.updated{font-size:12px;color:var(--muted);opacity:.8;margin-bottom:28px}
+.card{border-radius:18px;padding:22px 22px;margin-bottom:16px;border:1px solid rgba(255,255,255,.1);background:rgba(255,255,255,.04)}
+.card h2{font-family:Unbounded,sans-serif;font-size:1rem;font-weight:700;margin-bottom:12px;color:#f0eaff}
+.card p,.card li{color:#c8c0d8;line-height:1.6;font-size:14.5px;margin-bottom:10px}
+.card ul{padding-left:1.2rem;margin-bottom:8px}
+.card li{margin-bottom:6px}
+.faq-item{border-radius:14px;margin-bottom:10px;overflow:hidden;border:1px solid rgba(255,255,255,.1);background:rgba(255,255,255,.03)}
+.faq-q{width:100%;text-align:left;padding:14px 16px;background:transparent;border:0;color:#fff;font:700 14px Manrope,sans-serif;cursor:pointer;display:flex;justify-content:space-between;gap:12px}
+.faq-q span{color:var(--gold);transition:.25s}.faq-item.open .faq-q span{transform:rotate(45deg)}
+.faq-a{max-height:0;overflow:hidden;transition:max-height .35s ease,padding .35s;padding:0 16px;color:#c8c0d8;line-height:1.55;font-size:14px}
+.faq-item.open .faq-a{max-height:320px;padding:0 16px 14px}
+.links-row{display:flex;flex-wrap:wrap;gap:12px;margin-top:8px}
+.links-row a{font-weight:600}
+</style>
+</head>
+<body>
+<header class="top glass"><nav class="nav">
+<a class="brand" href="/index.html"><img src="/logo.png?v=2" alt="">NEXUS <b>RP</b></a>
+<button type="button" class="menu" aria-label="Меню">☰</button>
+<div class="links">
+<a href="/index.html">Главная</a>
+<a href="/donate.html">Донат</a>
+<a href="/discord.html">Discord</a>
+<a href="/rules.html">Правила</a>
+<a href="/faq.html">FAQ</a>
+<a href="/privacy.html">Privacy</a>
+<a href="/terms.html">Terms</a>
+</div></nav></header>
+
+<main class="wrap">
+  <h1 class="page-title"><span>Privacy Policy</span></h1>
+  <p class="lead">Политика конфиденциальности сайта <strong>Nexus RP</strong> (play.nexusroleplay.ru) и связанных сервисов, включая вход через Roblox OAuth и личный кабинет.</p>
+  <p class="updated">Обновлено: 24 ноября 2026 · действует для play.nexusroleplay.ru</p>
+
+  <div class="card">
+    <h2>1. Кто мы</h2>
+    <p>Nexus RP — Roblox RolePlay проект. Сайт и личный кабинет используются для информации о проекте, правил, доната, новостей и привязки аккаунта Roblox к сервисам сообщества.</p>
+  </div>
+
+  <div class="card">
+    <h2>2. Какие данные собираем</h2>
+    <ul>
+      <li><strong>Через Roblox OAuth (после вашего согласия):</strong> Roblox User ID, имя пользователя (username/display name), ссылка на аватар — в объёме, который отдаёт Roblox по запрошенным scope.</li>
+      <li><strong>Технические:</strong> IP и User-Agent могут обрабатываться хостингом/Cloudflare для безопасности и защиты от злоупотреблений.</li>
+      <li><strong>На сайте:</strong> данные, которые вы сами отправляете (например, через формы связи), если такие появятся.</li>
+    </ul>
+    <p>Мы <strong>не</strong> запрашиваем пароль Roblox. Вход только через официальный OAuth Roblox.</p>
+  </div>
+
+  <div class="card">
+    <h2>3. Зачем данные нужны</h2>
+    <ul>
+      <li>вход в личный кабинет и отображение профиля;</li>
+      <li>привязка аккаунта к сервисам Nexus RP (в будущем — статус, история на проекте и т.п.);</li>
+      <li>безопасность (сессии, защита от подделки входа);</li>
+      <li>улучшение работы сайта.</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h2>4. Хранение и защита</h2>
+    <p>Сессии и секреты OAuth обрабатываются на защищённой стороне (Cloudflare Workers / серверные secrets). Client Secret Roblox не публикуется в коде сайта. Доступ к данным ограничен задачами работы ЛК и администрирования проекта.</p>
+  </div>
+
+  <div class="card">
+    <h2>5. Передача третьим лицам</h2>
+    <p>Мы не продаём персональные данные. Передача возможна только: (1) по закону; (2) провайдерам инфраструктуры (хостинг, Cloudflare), в рамках их обработки трафика; (3) Roblox — в рамках OAuth, который вы сами подтверждаете.</p>
+  </div>
+
+  <div class="card">
+    <h2>6. Cookies и сессии</h2>
+    <p>Для входа в ЛК могут использоваться cookies сессии (в т.ч. httpOnly). Они нужны, чтобы вы оставались авторизованы, а не для рекламных трекеров третьих сторон.</p>
+  </div>
+
+  <div class="card">
+    <h2>7. Ваши права</h2>
+    <p>Вы можете отозвать доступ приложения к Roblox в настройках Roblox и прекратить использование ЛК. По вопросам данных пишите администрации в Discord: <a href="https://discord.gg/gRdeVkG5vf">discord.gg/gRdeVkG5vf</a>.</p>
+  </div>
+
+  <div class="card">
+    <h2>8. Дети</h2>
+    <p>Сервисы ориентированы на аудиторию Roblox с учётом возрастных правил платформы. Если вам нельзя пользоваться Roblox по правилам платформы, не используйте и наш вход через OAuth.</p>
+  </div>
+
+  <h2 style="font-family:Unbounded,sans-serif;font-size:1.1rem;margin:28px 0 14px">Краткий FAQ</h2>
+  <div class="faq-item"><button type="button" class="faq-q">Вы видите мой пароль Roblox? <span>+</span></button><div class="faq-a">Нет. Авторизация только через официальный OAuth Roblox. Пароль вводится на стороне Roblox, мы его не получаем.</div></div>
+  <div class="faq-item"><button type="button" class="faq-q">Что хранится после входа? <span>+</span></button><div class="faq-a">Как минимум идентификатор Roblox и данные профиля в рамках scope, плюс сессия входа на сайт. Подробности — в разделах 2–4 выше.</div></div>
+  <div class="faq-item"><button type="button" class="faq-q">Можно удалить привязку? <span>+</span></button><div class="faq-a">Отзовите доступ приложению в настройках Roblox и напишите в Discord администрации Nexus RP, если нужно удалить данные на нашей стороне.</div></div>
+
+  <div class="links-row" style="margin-top:28px">
+    <a href="/terms.html">Условия использования</a>
+    <a href="/faq.html">FAQ проекта</a>
+    <a href="https://discord.gg/gRdeVkG5vf">Discord</a>
+  </div>
+</main>
+
+<script src="site.js" defer></script>
+<script>
+(function(){
+  var menu=document.querySelector('.menu'),links=document.querySelector('.links');
+  if(menu&&links){menu.addEventListener('click',function(e){e.stopPropagation();links.classList.toggle('open');});document.addEventListener('click',function(e){if(!links.contains(e.target)&&e.target!==menu)links.classList.remove('open');});}
+  document.querySelectorAll('.faq-item').forEach(function(item){
+    var q=item.querySelector('.faq-q');if(!q)return;
+    q.addEventListener('click',function(){
+      var open=item.classList.contains('open');
+      document.querySelectorAll('.faq-item.open').forEach(function(x){x.classList.remove('open');});
+      if(!open)item.classList.add('open');
+    });
+  });
+})();
+</script>
+</body>
+</html>
